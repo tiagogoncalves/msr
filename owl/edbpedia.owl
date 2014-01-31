@@ -22,10 +22,16 @@
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Import>http://dbpedia.org/ontology/</Import>
     <Declaration>
+        <ObjectProperty IRI="#dates"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#likes"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#LaneProencia"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#MichelJackson"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#SpiderMan2"/>
@@ -33,6 +39,10 @@
     <ClassAssertion>
         <Class IRI="http://schema.org/Person"/>
         <NamedIndividual IRI="#LaneProencia"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://schema.org/Person"/>
+        <NamedIndividual IRI="#MichelJackson"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="http://schema.org/Movie"/>
@@ -43,14 +53,54 @@
         <NamedIndividual IRI="#LaneProencia"/>
         <NamedIndividual IRI="#SpiderMan2"/>
     </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#likes"/>
+        <NamedIndividual IRI="#MichelJackson"/>
+        <NamedIndividual IRI="#SpiderMan2"/>
+    </ObjectPropertyAssertion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#dates"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#dates"/>
+        <Class IRI="http://schema.org/Person"/>
+    </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#likes"/>
         <Class IRI="http://schema.org/Person"/>
     </ObjectPropertyDomain>
     <ObjectPropertyRange>
+        <ObjectProperty IRI="#dates"/>
+        <Class IRI="http://schema.org/Person"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
         <ObjectProperty IRI="#likes"/>
         <Class IRI="http://schema.org/Movie"/>
     </ObjectPropertyRange>
+    <DLSafeRule>
+        <Body>
+            <ClassAtom>
+                <Class IRI="http://schema.org/Person"/>
+                <Variable IRI="urn:swrl#x"/>
+            </ClassAtom>
+            <ClassAtom>
+                <Class IRI="http://schema.org/Person"/>
+                <Variable IRI="urn:swrl#y"/>
+            </ClassAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#notEqual">
+                <Variable IRI="urn:swrl#x"/>
+                <Variable IRI="urn:swrl#y"/>
+            </BuiltInAtom>
+        </Body>
+        <Head>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#dates"/>
+                <Variable IRI="urn:swrl#x"/>
+                <Variable IRI="urn:swrl#y"/>
+            </ObjectPropertyAtom>
+        </Head>
+    </DLSafeRule>
 </Ontology>
 
 
