@@ -8,3 +8,4 @@ SELECT ?film  WHERE {
 	SERVICE <http://data.linkedmdb.org/sparql> {
     	?film a movie:film 
 }
+}

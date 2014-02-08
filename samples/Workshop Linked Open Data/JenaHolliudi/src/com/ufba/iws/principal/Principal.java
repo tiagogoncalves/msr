@@ -7,8 +7,10 @@ import com.ufba.iws.sparql.FilmSPARQL;
 
 
 public class Principal {
-public static void main(String[] args) {
+public static void main(String[] args) throws IOException {
 	FilmSPARQL fs = new FilmSPARQL();
+	//fs.listFilms();
+	
 	try {
 		System.out.println("Filmes");
 		for (Film film : fs.listFilms()) {

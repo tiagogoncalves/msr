@@ -23,7 +23,7 @@ public class FilmSPARQL {
 		List<Film> films = null;
 		
         PropertyConfigurator.configure("jena-log4j.properties");
-        String path = "query";
+        String path = "presequel";
 
         byte[] encoded = Files.readAllBytes(Paths.get(path));
         String queryString = StandardCharsets.UTF_8.decode(ByteBuffer.wrap(encoded)).toString();
@@ -32,23 +32,27 @@ public class FilmSPARQL {
         String service = "http://data.linkedmdb.org/sparql";
 
         QueryExecution qe = QueryExecutionFactory.sparqlService(service,queryString);
+        System.out.println("okk");
         try {
         	films = new ArrayList<Film>();
             ResultSet results = qe.execSelect();
             for (; results.hasNext();) {
 
                 QuerySolution sol = (QuerySolution) results.next();
+                
 
-                Film film = new Film();
-                film.setFilmLabel(sol.get("?filmLabel").toString());
-                film.setDirector(sol.get("?directorName").toString());
-                film.setCountry(sol.get("?country").toString());
+              //  Film film = new Film();
+//                film.setFilmLabel(sol.get("?filmLabel").toString());
+//                film.setDirector(sol.get("?directorName").toString());
+//                film.setCountry(sol.get("?country").toString());
                 
                 
-                film.setActors(new ActorSPARQL().listActor(sol.get("?filmLabel").toString()));
-                film.setDescription(sol.get("?description").toString());
+//                film.setActors(new ActorSPARQL().listActor(sol.get("?filmLabel").toString()));
+//                film.setDescription(sol.get("?description").toString());
                 
-                films.add(film);
+                System.out.println(  sol.get("?film").toString());
+                
+               // films.add(film);
             }
         } catch (Exception e) {
             e.printStackTrace();

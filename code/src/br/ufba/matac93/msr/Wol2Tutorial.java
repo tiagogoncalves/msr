@@ -67,11 +67,9 @@ public class Wol2Tutorial {
         OWLReasoner reasoner2 = reasonerFactory2.createReasoner(ontology2, new SimpleConfiguration()); 
         OWLDataFactory factory2 = manager2.getOWLDataFactory(); 
         PrefixOWLOntologyFormat pm2 = (PrefixOWLOntologyFormat) manager2.getOntologyFormat(ontology2);
-<<<<<<< HEAD
-        String ns = "http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3";
-=======
+
         String ns = "http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2";
->>>>>>> 0e1f74cc48a0c6f70d5efaec259074f277a6f796
+
         pm2.setDefaultPrefix(ns + "#"); 
         
         String strPessoa = "<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#";
