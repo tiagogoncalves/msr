@@ -3,9 +3,12 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+PREFIX dbpprop: <http://dbpedia.org/property/> 
 
-SELECT ?film  WHERE {
+CONSTRUCT{    ?film rdfs:label ?label .}
+WHERE {
 	SERVICE <http://data.linkedmdb.org/sparql> {
-    	?film a movie:film 
-}
+    	?film a movie:film .
+    	?film rdfs:label ?label .
+    }
 }

@@ -60,21 +60,44 @@ public class Wol2Tutorial {
 //            System.out.println("person : " + renderer.render(person)); 
 //        } 
         
+		 String ns = "http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3";
         
         OWLOntologyManager manager2 = OWLManager.createOWLOntologyManager(); 
         OWLOntology ontology2 = manager2.loadOntologyFromOntologyDocument(new File("ontofilmes.owl"));
         OWLReasonerFactory reasonerFactory2 = PelletReasonerFactory.getInstance(); 
-        OWLReasoner reasoner2 = reasonerFactory2.createReasoner(ontology2, new SimpleConfiguration()); 
-        OWLDataFactory factory2 = manager2.getOWLDataFactory(); 
-        PrefixOWLOntologyFormat pm2 = (PrefixOWLOntologyFormat) manager2.getOntologyFormat(ontology2);
-
-        String ns = "http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2";
-
-        pm2.setDefaultPrefix(ns + "#"); 
+                               
         
+        OWLDataFactory factory2 = manager2.getOWLDataFactory();
+        
+        IRI ontologyIRI = IRI.create(ns);
+        
+        OWLIndividual john = factory2.getOWLNamedIndividual(IRI.create(ontologyIRI + "#John"));
+        
+        
+       // IRI indidualTiago = IRI.create(ontology2.getOntologyID().getOntologyIRI() + "#Tiago");
+        
+        OWLClass classePessoa = manager2.getOWLDataFactory().getOWLClass(IRI.create(ontologyIRI + "#Pessoa"));
+        
+        OWLClassAssertionAxiom axiom1 = factory2.getOWLClassAssertionAxiom(classePessoa, john);
+        
+        AddAxiom addAxiom = new AddAxiom(ontology2, axiom1);
+        
+        OWLReasoner reasoner2 = reasonerFactory2.createReasoner(ontology2, new SimpleConfiguration()); 
+        
+        
+        
+        PrefixOWLOntologyFormat pm2 = (PrefixOWLOntologyFormat) manager2.getOntologyFormat(ontology2);        
+        
+       
+
+        pm2.setDefaultPrefix(ns + "#");
+        
+                
         String strPessoa = "<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#";
         
         OWLClass personClass2 = factory2.getOWLClass(strPessoa + "Pessoa>", pm2); 
+        
+        
         
         for (OWLNamedIndividual person : reasoner2.getInstances(personClass2, false).getFlattened()) { 
             System.out.println("Pessoa : " + renderer.render(person)); 
