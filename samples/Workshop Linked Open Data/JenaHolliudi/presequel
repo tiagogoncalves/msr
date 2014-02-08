@@ -1,0 +1,10 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+
+SELECT ?film  WHERE {
+	SERVICE <http://data.linkedmdb.org/sparql> {
+    	?film a movie:film 
+}
