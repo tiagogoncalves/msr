@@ -3,12 +3,36 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dbpprop: <http://dbpedia.org/property/>
 
-SELECT ?film  ?prequel ?sequel WHERE {
+
+SELECT ?label ?prequel ?sequel ?starring ?director ?producer ?writer ?books ?country ?genre ?precededBy ?language ?title ?director WHERE {
 	SERVICE <http://data.linkedmdb.org/sparql> {
     	?film a movie:film.
+    	OPTIONAL{?film rdfs:label ?label}.
     	OPTIONAL{?film movie:prequel ?prequel}.
-    	 OPTIONAL{?film movie:sequel ?sequel}.
-}
+    	OPTIONAL{?film movie:sequel ?sequel}.
+    	OPTIONAL{?film movie:actor ?starring}.
+    	OPTIONAL{?film movie:director ?director}.
+  		OPTIONAL{?film movie:producer ?producer}.
+  		OPTIONAL{?film movie:writer ?writer}. 	
+  		?film owl:sameAs ?dbpediaLink.
+	}
+	SERVICE <http://dbpedia.org/sparql> {
+    	
+	    OPTIONAL{?dbpediaLink dbpprop:books ?books}.
+	    OPTIONAL{?dbpediaLink dbpprop:country ?country}.
+	    OPTIONAL{?dbpediaLink dbpprop:genre ?genre}. 
+		OPTIONAL{?dbpediaLink dbpprop:precededBy ?precededBy}.
+		OPTIONAL{?dbpediaLink dbpprop:language ?language}.
+		OPTIONAL{?dbpediaLink dbpprop:title ?title}.
+		OPTIONAL{?dbpediaLink dbpedia-owl:director ?director}.
+	    
+	}
+
 }
 LIMIT 50
+ 
+
+

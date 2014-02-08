@@ -13,7 +13,10 @@ import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Statement;
 import com.ufba.iws.content.Film;
 
 public class FilmSPARQL {
@@ -53,6 +56,8 @@ public class FilmSPARQL {
                 
 //                film.setActors(new ActorSPARQL().listActor(sol.get("?filmLabel").toString()));
 //                film.setDescription(sol.get("?description").toString());
+                
+                
                 
                 RDFNode prequel =sol.get("?prequel");
                 RDFNode sequel =sol.get("?sequel");
