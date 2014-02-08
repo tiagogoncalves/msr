@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-7-openjdk-amd64"/>
-	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/aterm-java-1.6.jar"/>
-	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-cli.jar"/>
-	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-core.jar"/>
-	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-datatypes.jar"/>
-	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-el.jar"/>
-	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-explanation.jar"/>
-	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-jena.jar"/>
-	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-modularity.jar"/>
-	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-owlapiv3.jar"/>
-	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-pellint.jar"/>
-	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-query.jar"/>
-	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-rules.jar"/>
-	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-test.jar"/>
-	<classpathentry kind="lib" path="/home/jan/Downloads/owlapi-distribution-3.4.10.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/jandson/workspace/msr/libs/pellet-2.3.1/lib/aterm-java-1.6.jar"/>
+	<classpathentry kind="lib" path="/home/jandson/workspace/msr/libs/pellet-2.3.1/lib/pellet-cli.jar"/>
+	<classpathentry kind="lib" path="/home/jandson/workspace/msr/libs/pellet-2.3.1/lib/pellet-core.jar"/>
+	<classpathentry kind="lib" path="/home/jandson/workspace/msr/libs/pellet-2.3.1/lib/pellet-datatypes.jar"/>
+	<classpathentry kind="lib" path="/home/jandson/workspace/msr/libs/pellet-2.3.1/lib/pellet-el.jar"/>
+	<classpathentry kind="lib" path="/home/jandson/workspace/msr/libs/pellet-2.3.1/lib/pellet-explanation.jar"/>
+	<classpathentry kind="lib" path="/home/jandson/workspace/msr/libs/pellet-2.3.1/lib/pellet-jena.jar"/>
+	<classpathentry kind="lib" path="/home/jandson/workspace/msr/libs/pellet-2.3.1/lib/pellet-modularity.jar"/>
+	<classpathentry kind="lib" path="/home/jandson/workspace/msr/libs/pellet-2.3.1/lib/pellet-owlapiv3.jar"/>
+	<classpathentry kind="lib" path="/home/jandson/workspace/msr/libs/pellet-2.3.1/lib/pellet-pellint.jar"/>
+	<classpathentry kind="lib" path="/home/jandson/workspace/msr/libs/pellet-2.3.1/lib/pellet-query.jar"/>
+	<classpathentry kind="lib" path="/home/jandson/workspace/msr/libs/pellet-2.3.1/lib/pellet-rules.jar"/>
+	<classpathentry kind="lib" path="/home/jandson/workspace/msr/libs/pellet-2.3.1/lib/pellet-test.jar"/>
+	<classpathentry kind="lib" path="/home/jandson/Downloads/owlapi-distribution-3.4.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
