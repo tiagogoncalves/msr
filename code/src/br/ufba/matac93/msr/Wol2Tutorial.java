@@ -20,7 +20,22 @@ import uk.ac.manchester.cs.owlapi.dlsyntax.DLSyntaxObjectRenderer;
 
 import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
 
-
+import com.clarkparsia.owlapi.explanation.DefaultExplanationGenerator; 
+import com.clarkparsia.owlapi.explanation.util.SilentExplanationProgressMonitor; 
+import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory; 
+import org.semanticweb.owlapi.apibinding.OWLManager; 
+import org.semanticweb.owlapi.io.OWLObjectRenderer; 
+import org.semanticweb.owlapi.model.*; 
+import org.semanticweb.owlapi.reasoner.OWLReasoner; 
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactory; 
+import org.semanticweb.owlapi.reasoner.SimpleConfiguration; 
+import org.semanticweb.owlapi.vocab.OWLRDFVocabulary; 
+import org.semanticweb.owlapi.vocab.PrefixOWLOntologyFormat; 
+import uk.ac.manchester.cs.bhig.util.Tree; 
+import uk.ac.manchester.cs.owl.explanation.ordering.ExplanationOrderer; 
+import uk.ac.manchester.cs.owl.explanation.ordering.ExplanationOrdererImpl; 
+import uk.ac.manchester.cs.owl.explanation.ordering.ExplanationTree; 
+import uk.ac.manchester.cs.owlapi.dlsyntax.DLSyntaxObjectRenderer; 
 
 public class Wol2Tutorial {
 
@@ -52,17 +67,21 @@ public class Wol2Tutorial {
         OWLReasoner reasoner2 = reasonerFactory2.createReasoner(ontology2, new SimpleConfiguration()); 
         OWLDataFactory factory2 = manager2.getOWLDataFactory(); 
         PrefixOWLOntologyFormat pm2 = (PrefixOWLOntologyFormat) manager2.getOntologyFormat(ontology2);
+
         String ns = "http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2";
+
         pm2.setDefaultPrefix(ns + "#"); 
         
-        OWLClass personClass2 = factory2.getOWLClass(":Pessoa", pm2); 
+        String strPessoa = "<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#";
+        
+        OWLClass personClass2 = factory2.getOWLClass(strPessoa + "Pessoa>", pm2); 
         
         for (OWLNamedIndividual person : reasoner2.getInstances(personClass2, false).getFlattened()) { 
             System.out.println("Pessoa : " + renderer.render(person)); 
-        } 
-        
-        OWLNamedIndividual indMaria = factory2.getOWLNamedIndividual(":Maria",pm2);
-        OWLObjectProperty propConhece = factory2.getOWLObjectProperty(":gosta",pm2);
+        }        
+                
+        OWLNamedIndividual indMaria = factory2.getOWLNamedIndividual(strPessoa + "Maria>",pm2);
+        OWLObjectProperty propConhece = factory2.getOWLObjectProperty(strPessoa + "conhece>",pm2);
         
         for (OWLNamedIndividual ind : reasoner2.getObjectPropertyValues(indMaria, propConhece).getFlattened()) { 
             System.out.println("Joao conhece: " + renderer.render(ind)); 

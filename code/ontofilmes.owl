@@ -5,6 +5,21 @@ Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
 Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 
 
+<<<<<<< HEAD
+Ontology(<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3>
+
+Declaration(Class(<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#Pessoa>))
+Declaration(ObjectProperty(<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#conhecce>))
+SymmetricObjectProperty(<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#conhecce>)
+ObjectPropertyDomain(<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#conhecce> <http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#Pessoa>)
+ObjectPropertyRange(<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#conhecce> <http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#Pessoa>)
+Declaration(NamedIndividual(<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#Joao>))
+ClassAssertion(<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#Pessoa> <http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#Joao>)
+Declaration(NamedIndividual(<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#Maria>))
+ClassAssertion(<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#Pessoa> <http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#Maria>)
+ObjectPropertyAssertion(<http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#conhecce> <http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#Maria> <http://www.semanticweb.org/lasid/ontologies/2014/1/untitled-ontology-3#Joao>)
+)
+=======
 Ontology(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2>
 
 Declaration(Class(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Filme>))
@@ -26,3 +41,4 @@ NegativeObjectPropertyAssertion(<http://www.semanticweb.org/administrator/ontolo
 Declaration(NamedIndividual(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#XMen>))
 DLSafeRule(Body(ClassAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Pessoa> Variable(<urn:swrl#x>)) ClassAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Pessoa> Variable(<urn:swrl#y>)) ObjectPropertyAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#conhece> Variable(<urn:swrl#x>) Variable(<urn:swrl#y>)) ObjectPropertyAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta> Variable(<urn:swrl#x>) Variable(<urn:swrl#a>)) ObjectPropertyAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta> Variable(<urn:swrl#y>) Variable(<urn:swrl#a>)) ObjectPropertyAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta> Variable(<urn:swrl#y>) Variable(<urn:swrl#b>)))Head(ObjectPropertyAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta> Variable(<urn:swrl#x>) Variable(<urn:swrl#b>))))
 )
+>>>>>>> 0e1f74cc48a0c6f70d5efaec259074f277a6f796

@@ -1,42 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="libs/aterm-java-1.6.jar"/>
-	<classpathentry kind="lib" path="libs/commons-codec-1.6.jar"/>
-	<classpathentry kind="lib" path="libs/httpclient-4.2.3.jar"/>
-	<classpathentry kind="lib" path="libs/httpcore-4.2.2.jar"/>
-	<classpathentry kind="lib" path="libs/jcl-over-slf4j-1.6.4.jar"/>
-	<classpathentry kind="lib" path="libs/jena-arq-2.11.1.jar"/>
-	<classpathentry kind="lib" path="libs/jena-core-2.11.1.jar"/>
-	<classpathentry kind="lib" path="libs/jena-iri-1.0.1.jar"/>
-	<classpathentry kind="lib" path="libs/jena-sdb-1.4.1.jar"/>
-	<classpathentry kind="lib" path="libs/jena-tdb-1.0.1.jar"/>
-	<classpathentry kind="lib" path="libs/log4j-1.2.16.jar"/>
-	<classpathentry kind="lib" path="libs/pellet-cli.jar"/>
-	<classpathentry kind="lib" path="libs/pellet-core.jar"/>
-	<classpathentry kind="lib" path="libs/pellet-datatypes.jar"/>
-	<classpathentry kind="lib" path="libs/pellet-el.jar"/>
-	<classpathentry kind="lib" path="libs/pellet-explanation.jar"/>
-	<classpathentry kind="lib" path="libs/pellet-jena.jar"/>
-	<classpathentry kind="lib" path="libs/pellet-modularity.jar"/>
-	<classpathentry kind="lib" path="libs/pellet-owlapiv3.jar"/>
-	<classpathentry kind="lib" path="libs/pellet-pellint.jar"/>
-	<classpathentry kind="lib" path="libs/pellet-query.jar"/>
-	<classpathentry kind="lib" path="libs/pellet-rules.jar"/>
-	<classpathentry kind="lib" path="libs/pellet-test.jar"/>
-	<classpathentry kind="lib" path="libs/slf4j-api-1.6.4.jar"/>
-	<classpathentry kind="lib" path="libs/slf4j-log4j12-1.6.4.jar"/>
-	<classpathentry kind="lib" path="libs/xercesImpl-2.11.0.jar"/>
-	<classpathentry kind="lib" path="libs/xml-apis-1.4.01.jar"/>
-	<classpathentry kind="lib" path="libs/owlapi-distribution-3.4.3-bin.jar"/>
-	<classpathentry kind="lib" path="libs/antlr-runtime-3.2.jar"/>
-	<classpathentry kind="lib" path="libs/jena-arq-2.10.0.jar"/>
-	<classpathentry kind="lib" path="libs/jena-core-2.10.0.jar"/>
-	<classpathentry kind="lib" path="libs/jena-iri-0.9.5.jar"/>
-	<classpathentry kind="lib" path="libs/jena-tdb-0.10.0.jar"/>
-	<classpathentry kind="lib" path="libs/jgrapht-jdk1.5.jar"/>
-	<classpathentry kind="lib" path="libs/junit.jar"/>
-	<classpathentry kind="lib" path="libs/xercesImpl-2.10.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-7-openjdk-amd64"/>
+	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/aterm-java-1.6.jar"/>
+	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-cli.jar"/>
+	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-core.jar"/>
+	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-datatypes.jar"/>
+	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-el.jar"/>
+	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-explanation.jar"/>
+	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-jena.jar"/>
+	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-modularity.jar"/>
+	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-owlapiv3.jar"/>
+	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-pellint.jar"/>
+	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-query.jar"/>
+	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-rules.jar"/>
+	<classpathentry kind="lib" path="/home/jan/workspace/msr1/msr/libs/pellet-2.3.1/lib/pellet-test.jar"/>
+	<classpathentry kind="lib" path="/home/jan/Downloads/owlapi-distribution-3.4.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
