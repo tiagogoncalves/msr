@@ -1,0 +1,28 @@
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2>
+
+Declaration(Class(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Filme>))
+Declaration(Class(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Pessoa>))
+Declaration(ObjectProperty(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#conhece>))
+SymmetricObjectProperty(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#conhece>)
+ObjectPropertyDomain(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#conhece> <http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Pessoa>)
+ObjectPropertyRange(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#conhece> <http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Pessoa>)
+Declaration(ObjectProperty(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta>))
+ObjectPropertyDomain(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta> <http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Pessoa>)
+ObjectPropertyRange(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta> <http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Filme>)
+Declaration(NamedIndividual(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#HomemAranha>))
+Declaration(NamedIndividual(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Joao>))
+NegativeObjectPropertyAssertion(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#conhece> <http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Joao> <http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Maria>)
+NegativeObjectPropertyAssertion(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta> <http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Joao> <http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#HomemAranha>)
+Declaration(NamedIndividual(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Maria>))
+NegativeObjectPropertyAssertion(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta> <http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Maria> <http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#HomemAranha>)
+NegativeObjectPropertyAssertion(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta> <http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Maria> <http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#XMen>)
+Declaration(NamedIndividual(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#XMen>))
+DLSafeRule(Body(ClassAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Pessoa> Variable(<urn:swrl#x>)) ClassAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#Pessoa> Variable(<urn:swrl#y>)) ObjectPropertyAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#conhece> Variable(<urn:swrl#x>) Variable(<urn:swrl#y>)) ObjectPropertyAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta> Variable(<urn:swrl#x>) Variable(<urn:swrl#a>)) ObjectPropertyAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta> Variable(<urn:swrl#y>) Variable(<urn:swrl#a>)) ObjectPropertyAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta> Variable(<urn:swrl#y>) Variable(<urn:swrl#b>)))Head(ObjectPropertyAtom(<http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2#gosta> Variable(<urn:swrl#x>) Variable(<urn:swrl#b>))))
+)

@@ -1,5 +1,7 @@
 package br.ufba.matac93.msr;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
@@ -11,7 +13,6 @@ import com.hp.hpl.jena.ontology.ObjectProperty;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
-import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
@@ -19,7 +20,6 @@ import com.hp.hpl.jena.rdf.model.RDFReader;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.ReasonerRegistry;
-import com.hp.hpl.jena.reasoner.ValidityReport;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 
@@ -27,8 +27,9 @@ public class Main {
 
 	/**
 	 * @param args
+	 * @throws FileNotFoundException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		// String ont = "ontofilmeX.owl";
 		// String ns =
 		// "http://www.semanticweb.org/jandson/ontologies/2014/1/untitled-ontology-4#";
@@ -97,13 +98,12 @@ public class Main {
 		// //printIterator(model.listObjectsOfProperty(c, RDFS.subClassOf),
 		// "All super classes of " + c.getLocalName());
 
-		String ont = "ontofilmeX.owl";
-		String ns = "http://www.semanticweb.org/jandson/ontologies/2014/1/untitled-ontology-4#";
+		String ont = "swrl_tutorial.owl";
+		String ns = "http://acrab.ics.muni.cz/ontologies/swrl_tutorial.owl#";
 
-		OntModel model = ModelFactory.createOntologyModel(
-				PelletReasonerFactory.THE_SPEC, null);
+		OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC, null);
 
-		model.read(ont);
+		model.read(new FileInputStream(ont),null,"");
 
 		model.prepare();
 
@@ -139,8 +139,7 @@ public class Main {
 		Model model2 = ModelFactory.createOntologyModel();
 		RDFReader g = model.getReader();
 
-		OntModel ontologyModel = ModelFactory
-				.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+		OntModel ontologyModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
 		InputStream ont2 = FileManager.get().open(ont);
 		try {
 			ont2.close();
@@ -162,8 +161,7 @@ public class Main {
 
 		Resource c2t = infModel2.getResource(ns + "Joao");
 		Property prf = infModel2.getProperty(ns + "gosta");
-		printIterator(infModel2.listObjectsOfProperty(c2t, prf),
-				"All super classes of " + c2t.getLocalName());
+		printIterator(infModel2.listObjectsOfProperty(c2t, prf),"All super classes of " + c2t.getLocalName());
 
 	}
 
@@ -188,8 +186,7 @@ public class Main {
 	}
 
 	public static void printPropertyValues(Individual ind, Property prop) {
-		System.out.print(ind.getLocalName() + " has " + prop.getLocalName()
-				+ "(s): ");
+		System.out.print(ind.getLocalName() + " has " + prop.getLocalName()	+ "(s): ");
 		printIterator(ind.listPropertyValues(prop));
 	}
 

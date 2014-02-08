@@ -47,12 +47,12 @@ public class Wol2Tutorial {
         
         
         OWLOntologyManager manager2 = OWLManager.createOWLOntologyManager(); 
-        OWLOntology ontology2 = manager2.loadOntologyFromOntologyDocument(new File("ontofilmeF.owl"));
+        OWLOntology ontology2 = manager2.loadOntologyFromOntologyDocument(new File("ontofilmes.owl"));
         OWLReasonerFactory reasonerFactory2 = PelletReasonerFactory.getInstance(); 
         OWLReasoner reasoner2 = reasonerFactory2.createReasoner(ontology2, new SimpleConfiguration()); 
         OWLDataFactory factory2 = manager2.getOWLDataFactory(); 
         PrefixOWLOntologyFormat pm2 = (PrefixOWLOntologyFormat) manager2.getOntologyFormat(ontology2);
-        String ns = "http://www.semanticweb.org/jandson/ontologies/2014/1/untitled-ontology-4";
+        String ns = "http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2";
         pm2.setDefaultPrefix(ns + "#"); 
         
         OWLClass personClass2 = factory2.getOWLClass(":Pessoa", pm2); 

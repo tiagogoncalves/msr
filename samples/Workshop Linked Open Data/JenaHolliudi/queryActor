@@ -1,0 +1,21 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dbpprop: <http://dbpedia.org/property/> 
+PREFIX rsc:<http://dbpedia.org/resource/>
+
+SELECT ?actorName ?photoUri ?birthDate ?birthPlace ?filmLabel
+WHERE {
+?film rdf:type <http://dbpedia.org/ontology/Film>.
+?film dbpprop:starring ?actor.
+?film dbpprop:name ?filmLabel.
+?actor dbpprop:name ?actorName.
+?actor dbpprop:hasPhotoCollection ?photoUri.
+?actor dbpprop:birthDate ?birthDate.
+?actor dbpprop:birthPlace ?birthPlace. 
+
+FILTER(str(?filmLabel) = "$resource$")
+
+}
+LIMIT 10
