@@ -4,12 +4,15 @@ import java.util.List;
 
 public class Film {
 	
+	private String filmURL;
 	private String filmLabel;
 	private String director;
 	private String country;
 	private List<Actor> actors;
 	private String description;
 	private String primaryTopic;
+	private Film prequel;
+	private Film sequel; 
 	
 	public String getFilmLabel() {
 		return filmLabel;
@@ -46,6 +49,24 @@ public class Film {
 	}
 	public void setPrimaryTopic(String primaryTopic) {
 		this.primaryTopic = primaryTopic;
+	}
+	public String getFilmURL() {
+		return filmURL;
+	}
+	public void setFilmURL(String filmURL) {
+		this.filmURL = filmURL;
+	}
+	public Film getPrequel() {
+		return prequel;
+	}
+	public void setPrequel(Film prequel) {
+		this.prequel = prequel;
+	}
+	public Film getSequel() {
+		return sequel;
+	}
+	public void setSequel(Film sequel) {
+		this.sequel = sequel;
 	}
 	
 	

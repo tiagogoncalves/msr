@@ -20,23 +20,6 @@ import uk.ac.manchester.cs.owlapi.dlsyntax.DLSyntaxObjectRenderer;
 
 import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
 
-import com.clarkparsia.owlapi.explanation.DefaultExplanationGenerator; 
-import com.clarkparsia.owlapi.explanation.util.SilentExplanationProgressMonitor; 
-import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory; 
-import org.semanticweb.owlapi.apibinding.OWLManager; 
-import org.semanticweb.owlapi.io.OWLObjectRenderer; 
-import org.semanticweb.owlapi.model.*; 
-import org.semanticweb.owlapi.reasoner.OWLReasoner; 
-import org.semanticweb.owlapi.reasoner.OWLReasonerFactory; 
-import org.semanticweb.owlapi.reasoner.SimpleConfiguration; 
-import org.semanticweb.owlapi.vocab.OWLRDFVocabulary; 
-import org.semanticweb.owlapi.vocab.PrefixOWLOntologyFormat; 
-import uk.ac.manchester.cs.bhig.util.Tree; 
-import uk.ac.manchester.cs.owl.explanation.ordering.ExplanationOrderer; 
-import uk.ac.manchester.cs.owl.explanation.ordering.ExplanationOrdererImpl; 
-import uk.ac.manchester.cs.owl.explanation.ordering.ExplanationTree; 
-import uk.ac.manchester.cs.owlapi.dlsyntax.DLSyntaxObjectRenderer; 
-
 public class Wol2Tutorial {
 
 	
@@ -83,12 +66,20 @@ public class Wol2Tutorial {
         AddAxiom addAxiom = new AddAxiom(ontology2, axiom1);
         
         OWLReasoner reasoner2 = reasonerFactory2.createReasoner(ontology2, new SimpleConfiguration()); 
+<<<<<<< HEAD
         
         
         
         PrefixOWLOntologyFormat pm2 = (PrefixOWLOntologyFormat) manager2.getOntologyFormat(ontology2);        
         
        
+=======
+        OWLDataFactory factory2 = manager2.getOWLDataFactory(); 
+        PrefixOWLOntologyFormat pm2 = (PrefixOWLOntologyFormat) manager2.getOntologyFormat(ontology2);
+
+        
+        String ns = "http://www.semanticweb.org/administrator/ontologies/2014/1/untitled-ontology-2";
+>>>>>>> 35f1039dbb5c1112da9dbdc1a33bc881cb6f024a
 
         pm2.setDefaultPrefix(ns + "#");
         
