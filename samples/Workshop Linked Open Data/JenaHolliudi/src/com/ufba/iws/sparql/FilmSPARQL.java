@@ -13,6 +13,7 @@ import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.ufba.iws.content.Film;
 
 public class FilmSPARQL {
@@ -41,7 +42,10 @@ public class FilmSPARQL {
                 QuerySolution sol = (QuerySolution) results.next();
                 
 
-              //  Film film = new Film();
+//                Film film = new Film();
+//                film.setFilmURL(sol.get("?url").toString());
+//                film.setSequel(sol.get("?sequel").toString());
+//                film.setSequel(sol.get("?sequel").toString());
 //                film.setFilmLabel(sol.get("?filmLabel").toString());
 //                film.setDirector(sol.get("?directorName").toString());
 //                film.setCountry(sol.get("?country").toString());
@@ -50,8 +54,15 @@ public class FilmSPARQL {
 //                film.setActors(new ActorSPARQL().listActor(sol.get("?filmLabel").toString()));
 //                film.setDescription(sol.get("?description").toString());
                 
-                System.out.println(  sol.get("?film").toString());
+                RDFNode prequel =sol.get("?prequel");
+                RDFNode sequel =sol.get("?sequel");
                 
+				System.out.println(sol.get("?film"));
+				if(prequel!=null)
+					System.out.println("| prequel:" + prequel.toString());
+				if(sequel!=null)
+					System.out.println("| sequel:" + sequel.toString());
+				
                // films.add(film);
             }
         } catch (Exception e) {

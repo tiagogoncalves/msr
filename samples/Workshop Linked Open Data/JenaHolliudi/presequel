@@ -4,8 +4,11 @@ PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
 
-SELECT ?film  WHERE {
+SELECT ?film  ?prequel ?sequel WHERE {
 	SERVICE <http://data.linkedmdb.org/sparql> {
-    	?film a movie:film 
+    	?film a movie:film.
+    	OPTIONAL{?film movie:prequel ?prequel}.
+    	 OPTIONAL{?film movie:sequel ?sequel}.
 }
 }
+LIMIT 50
