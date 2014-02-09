@@ -1,19 +1,27 @@
 package com.ufba.iws.sparql;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.PropertyConfigurator;
 
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.ResIterator;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.ufba.iws.content.Film;
 
 public class FilmSPARQL {
@@ -33,20 +41,86 @@ public class FilmSPARQL {
         String service = "http://data.linkedmdb.org/sparql";
 
         QueryExecution qe = QueryExecutionFactory.sparqlService(service,queryString);
-        System.out.println("okk");
+       // System.out.println("okk");
         try {
         	films = new ArrayList<Film>();
         	//ResultSet results = qe.execSelect();  
-//        	Query query = QueryFactory.create(queryString);
+       // 	Query query = QueryFactory.create(queryString);
 //        	        	
-//        	ResultSetFormatter.out(System.out, results, query); 
+  //      	ResultSetFormatter.out(System.out, results, query); 
         	
-        	//QueryExecution qe = QueryExecutionFactory.create(query, oracleSemModel) ;
-        	//Model model = qe.execConstruct();
+    //    	QueryExecution qe = QueryExecutionFactory.create(query, oracleSemModel) ;
+      //  	Model model = qe.execConstruct();
         	
         	Model model = qe.execConstruct();
         	
-        	model.write(System.out, "RDF/XML-ABBREV");
+        	//Model model = ModelFactory.createDefaultModel();
+        	
+        	//model.read("rdfLinked");
+        	
+        	FileWriter fw = new FileWriter(new File("rdfLinkedDbPedia"));
+        	
+        	model.write(fw, "RDF/XML-ABBREV");
+//        	ResIterator it = model.listSubjects();
+//        	
+//        	while(it.hasNext()){
+//        		
+//        		Resource r = it.nextResource();
+//        		
+//        		System.out.println(r.getURI());
+//        		
+//        		Statement stmt2 = r.getRequiredProperty(model.getProperty("http://www.w3.org/2000/01/rdf-schema#label"));
+//        		
+//        		System.out.println(stmt2.getString());        				
+//        		
+//        		       		
+//
+////        		
+//        	}
+//        	
+//        	Resource r = it.next();
+//        	
+//        	StmtIterator sIt = r.listProperties();
+//        	
+//        	while(sIt.hasNext()){
+//        		
+//        		Statement stm = sIt.next();
+//        		
+//        		System.out.println(stm.toString());
+//        	}
+        	
+        	//System.out.println(r.getProperty(model.getProperty("movie:writer")).toString());
+        	
+//        	for ( ; it.hasNext() ; ){
+//        		
+//        		Resource r = it.nextResource();        		
+//        		
+//        		StmtIterator sit = r.listProperties();
+//        		
+//        		while(sit.hasNext()){
+//        			
+//        			Statement stmt = sit.next();
+//        			Resource res2 = stmt.getSubject();        			
+//        	
+//        	        System.out.print(res2.getNameSpace(  ) + res2.getLocalName(  ));
+//        	        
+//        	        // Get predicate, print
+//        	        Property prop = stmt.getPredicate(  );
+//        	        System.out.print(" " + prop.getNameSpace(  ) + prop.getLocalName(  ));
+//
+//        	        // Get object, print
+//        	        RDFNode node = stmt.getObject(  );
+//        	        System.out.println(" " + node.toString(  ) + "\n");
+//        			
+//        		}
+//        		
+//        		
+//        		
+//        		//System.out.println(r.getProperty(model.getProperty("rdfs:label")));
+//        		
+//        		System.out.println();
+        		
+        	//}
         	
         	
 //        	Model results2 = qe.execConstruct();
@@ -90,7 +164,7 @@ public class FilmSPARQL {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            qe.close();
+           // qe.close();
         }
 		return films;
 

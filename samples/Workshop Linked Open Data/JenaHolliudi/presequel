@@ -42,4 +42,9 @@ OPTIONAL{?dbpediaLink dbpprop:books ?books.
 ?dbpediaLink dbpprop:precededBy ?precededBy.
 ?dbpediaLink dbpprop:language ?language.}
 }
+<<<<<<< HEAD
+=======
+
+}
+>>>>>>> 98c96b610f5872f18c4c9849f35f68cdb22c7c0f
 
