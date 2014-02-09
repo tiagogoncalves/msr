@@ -3,7 +3,7 @@ PREFIX dbpedia: <http://dbpedia.org/>
 PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX dbpprop: <http://dbpedia.org/property/> 
-PREFIX rsc:<http://dbpedia.org/resource/>
+
 
 SELECT ?actorName ?photoUri ?birthDate ?birthPlace ?filmLabel
 WHERE {

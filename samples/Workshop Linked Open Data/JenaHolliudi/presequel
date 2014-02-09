@@ -3,6 +3,17 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+<<<<<<< HEAD
+PREFIX dbpprop: <http://dbpedia.org/property/> 
+
+CONSTRUCT{    ?film rdfs:label ?label .}
+WHERE {
+	SERVICE <http://data.linkedmdb.org/sparql> {
+    	?film a movie:film .
+    	?film rdfs:label ?label .
+    }
+}
+=======
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX dbpprop: <http://dbpedia.org/property/>
 
@@ -36,3 +47,4 @@ LIMIT 50
  
 
 
+>>>>>>> 35f1039dbb5c1112da9dbdc1a33bc881cb6f024a

@@ -12,11 +12,8 @@ import org.apache.log4j.PropertyConfigurator;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.Statement;
 import com.ufba.iws.content.Film;
 
 public class FilmSPARQL {
@@ -39,10 +36,27 @@ public class FilmSPARQL {
         System.out.println("okk");
         try {
         	films = new ArrayList<Film>();
-            ResultSet results = qe.execSelect();
-            for (; results.hasNext();) {
+        	//ResultSet results = qe.execSelect();  
+//        	Query query = QueryFactory.create(queryString);
+//        	        	
+//        	ResultSetFormatter.out(System.out, results, query); 
+        	
+        	//QueryExecution qe = QueryExecutionFactory.create(query, oracleSemModel) ;
+        	//Model model = qe.execConstruct();
+        	
+        	Model model = qe.execConstruct();
+        	
+        	model.write(System.out, "RDF/XML-ABBREV");
+        	
+        	
+//        	Model results2 = qe.execConstruct();
+//        	results2.write(System.out, "TURTLE");
+            
+            
+            
+            //for (; results.hasNext();) {
 
-                QuerySolution sol = (QuerySolution) results.next();
+                //QuerySolution sol = (QuerySolution) results.next();
                 
 
 //                Film film = new Film();
@@ -57,19 +71,22 @@ public class FilmSPARQL {
 //                film.setActors(new ActorSPARQL().listActor(sol.get("?filmLabel").toString()));
 //                film.setDescription(sol.get("?description").toString());
                 
+
+               // System.out.println(  sol.get("?film").toString());
+
                 
                 
-                RDFNode prequel =sol.get("?prequel");
-                RDFNode sequel =sol.get("?sequel");
+               // RDFNode prequel =sol.get("?prequel");
+             //   RDFNode sequel =sol.get("?sequel");
                 
-				System.out.println(sol.get("?film"));
-				if(prequel!=null)
-					System.out.println("| prequel:" + prequel.toString());
-				if(sequel!=null)
-					System.out.println("| sequel:" + sequel.toString());
+//				System.out.println(sol.get("?film"));
+//				if(prequel!=null)
+//					System.out.println("| prequel:" + prequel.toString());
+//				if(sequel!=null)
+//					System.out.println("| sequel:" + sequel.toString());
 				
                // films.add(film);
-            }
+            //}
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
