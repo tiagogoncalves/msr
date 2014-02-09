@@ -14,11 +14,7 @@ CONSTRUCT { ?film a movie:film.
 ?film movie:director ?director.
 ?film movie:producer ?producer.
 ?film movie:writer ?writer.
-?dbpediaLink dbpprop:books ?books.
-?dbpediaLink dbpprop:country ?country.
-?dbpediaLink dbpprop:genre ?genre.
-?dbpediaLink dbpprop:precededBy ?precededBy.
-?dbpediaLink dbpprop:language ?language. } 
+?dbpediaLink dbpprop:books ?books. } 
 
 WHERE {
 	SERVICE <http://data.linkedmdb.org/sparql> {
@@ -34,14 +30,8 @@ OPTIONAL {?film movie:prequel ?prequel.
 ?film owl:sameAs ?dbpediaLink. 
 }
 
-	SERVICE <http://dbpedia.org/sparql> {
-    
-OPTIONAL{?dbpediaLink dbpprop:books ?books.
-?dbpediaLink dbpprop:country ?country.
-?dbpediaLink dbpprop:genre ?genre.
-?dbpediaLink dbpprop:precededBy ?precededBy.
-?dbpediaLink dbpprop:language ?language.}
+SERVICE <http://dbpedia.org/sparql>{
+	?dbpediaLink dbpprop:books ?books
 }
 
 }
-
