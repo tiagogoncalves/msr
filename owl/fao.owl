@@ -64,7 +64,6 @@ ObjectPropertyDomain(<http://www.semanticweb.org/matac93/ontology/fao#videos> <h
 Declaration(DataProperty(<http://www.semanticweb.org/matac93/ontology/fao#birthday>))
 AnnotationAssertion(rdfs:comment <http://www.semanticweb.org/matac93/ontology/fao#birthday> "Provides access to the birthday with year as the birthday property. Note that your app may determine if a user is 'old enough' to use an app by obtaining the age_range public profile property"^^xsd:string)
 DataPropertyDomain(<http://www.semanticweb.org/matac93/ontology/fao#birthday> <http://www.semanticweb.org/matac93/ontology/fao#Person>)
-DataPropertyRange(<http://www.semanticweb.org/matac93/ontology/fao#birthday> xsd:dateTime)
 Declaration(DataProperty(<http://www.semanticweb.org/matac93/ontology/fao#gender>))
 SubDataPropertyOf(<http://www.semanticweb.org/matac93/ontology/fao#gender> owl:topDataProperty)
 DataPropertyDomain(<http://www.semanticweb.org/matac93/ontology/fao#gender> <http://www.semanticweb.org/matac93/ontology/fao#Person>)
