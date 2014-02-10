@@ -32,19 +32,20 @@ import com.hp.hpl.jena.rdf.model.Statement;
 public class Main2Teste {
 
 	private static OWLObjectRenderer renderer = new DLSyntaxObjectRenderer();
-	private static final String namSpaceLinkedMD = "http://www.semanticweb.org/matc93/ontology/linkedmdb_lite#prequel";
+	private static final String namSpaceLinkedMD = "http://www.semanticweb.org/matc93/ontology/linkedmdb_lite";
 	private static final String nameSpaceMovie = "http://data.linkedmdb.org/resource/movie/";
+	private static final String dbPediaProperty = "http://dbpedia.org/property/";
 
 	public static void main(String[] args) throws OWLOntologyCreationException {
 		String ns = "http://dbpedia.org/matc93/ontology/dbpedia_lite";
 
 		OWLOntologyManager manager2 = OWLManager.createOWLOntologyManager();
 
-		manager2.loadOntologyFromOntologyDocument(new File("fao.owl"));
-		manager2.loadOntologyFromOntologyDocument(new File("linkedmdb_lite.owl"));
+		manager2.loadOntologyFromOntologyDocument(new File("MSR/fao.owl"));
+		manager2.loadOntologyFromOntologyDocument(new File("MSR/linkedmdb_lite.owl"));
 
 		OWLOntology ontology2 = manager2
-				.loadOntologyFromOntologyDocument(new File("dbpedia_lite.owl"));
+				.loadOntologyFromOntologyDocument(new File("MSR/dbpedia_lite.owl"));
 		OWLReasonerFactory reasonerFactory2 = PelletReasonerFactory
 				.getInstance();
 
@@ -52,7 +53,7 @@ public class Main2Teste {
 
 		Model model = ModelFactory.createDefaultModel();
 
-		model.read("rdfLinkedQY");
+		model.read("MSR/rdfLinkedQY");
 
 		ResIterator it = model.listSubjects();
 
@@ -69,6 +70,9 @@ public class Main2Teste {
 			OntologyMethods.addDataProperty(ns, "label", stmt2.getString(),
 					individual, manager2, ontology2);
 
+			
+			///pegando os genêros
+			
 			Resource r2 = r.getPropertyResourceValue(model
 					.getProperty(nameSpaceMovie + "genre"));
 
@@ -76,6 +80,62 @@ public class Main2Teste {
 				OntologyMethods.addIndividualOnObjProperty(ns, individual,
 						r2.getURI(), manager2, ontology2, "genre");
 			}
+			
+			//pegando os atores
+			
+			r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie+"actor"));
+			if (r2 != null) {
+				OntologyMethods.addIndividualOnObjProperty(ns, individual,
+						r2.getURI(), manager2, ontology2, "starring");
+			}
+			
+			//pegando as linguas
+			
+			r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie+"language"));
+			if (r2 != null) {
+				OntologyMethods.addDataProperty(dbPediaProperty, "language", r2.getURI(), individual, manager2, ontology2);
+			}
+			
+			//pegando os produtores
+			
+			r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie+"producer"));
+			if (r2 != null) {
+				OntologyMethods.addIndividualOnObjProperty(ns, individual,
+						r2.getURI(), manager2, ontology2, "producer");
+			}
+			
+			//pegando os escritores
+			
+			r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie+"writer"));
+			if (r2 != null) {
+				OntologyMethods.addIndividualOnObjProperty(ns, individual,
+						r2.getURI(), manager2, ontology2, "writer");
+			}
+			
+			//pegando os diretores
+			
+			r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie+"director"));
+			if (r2 != null) {
+				OntologyMethods.addIndividualOnObjProperty(ns, individual,
+						r2.getURI(), manager2, ontology2, "director");
+			}
+			
+			//filmes prequel de outro filme
+			
+			r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie+"prequel"));
+			if (r2 != null) {
+				OntologyMethods.addIndividualOnObjProperty(namSpaceLinkedMD, individual,
+						r2.getURI(), manager2, ontology2, "#prequel");
+			}
+			
+			//filmes sequel de outro filme
+			
+			r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie+"sequel"));
+			if (r2 != null) {
+				OntologyMethods.addIndividualOnObjProperty(namSpaceLinkedMD, individual,
+						r2.getURI(), manager2, ontology2, "#sequel");
+			}
+			
 
 		}
 
@@ -96,24 +156,26 @@ public class Main2Teste {
 
 		for (OWLNamedIndividual person : reasoner2.getInstances(personClass2,
 				false).getFlattened()) {
-			System.out.println("Movies : " + renderer.render(person));
-
-			OWLDataProperty dataP = factory2.getOWLDataProperty(strNs
-					+ "#label>", pm2);
-
-			for (OWLLiteral ind : reasoner2
-					.getDataPropertyValues(person, dataP)) {
-				System.out.println("Teste label: " + renderer.render(ind));
-			}
-			
-			OWLObjectProperty propConhece = factory2.getOWLObjectProperty(strNs
-					+ "genre>", pm2);
-
-//			for (OWLNamedIndividual ind : reasoner2.getObjectPropertyValues(
-//					person, propConhece).getFlattened()) {
-//				System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-//				System.out.println("Joao conhece: " + ind.toString());
+//			System.out.println("Movies : " + renderer.render(person));
+//
+//			OWLDataProperty dataP = factory2.getOWLDataProperty("<"+dbPediaProperty
+//					+ "#language>", pm2);
+//
+//			for (OWLLiteral ind : reasoner2
+//					.getDataPropertyValues(person, dataP)) {
+//				System.out.println("Teste lang: " + renderer.render(ind));
 //			}
+			
+		
+			
+			OWLObjectProperty propConhece = factory2.getOWLObjectProperty("<"+ namSpaceLinkedMD
+					+ "#prequel>", pm2);
+
+			for (OWLNamedIndividual ind : reasoner2.getObjectPropertyValues(
+					person, propConhece).getFlattened()) {
+				System.out.println(renderer.render(person) + "\t" + ind.toString());
+			}
+
 
 		}
 

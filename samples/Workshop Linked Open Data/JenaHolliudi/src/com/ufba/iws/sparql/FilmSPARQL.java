@@ -14,7 +14,6 @@ import org.apache.log4j.PropertyConfigurator;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.ufba.iws.content.Film;
 
 public class FilmSPARQL {
 

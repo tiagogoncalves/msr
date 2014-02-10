@@ -8,6 +8,10 @@ Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 Ontology(<http://www.semanticweb.org/matac93/ontology/fao>
 Annotation(rdfs:comment "From: https://developers.facebook.com/docs/graph-api/reference/")
 
+Declaration(Class(<http://www.semanticweb.org/matac93/ontology/fao#Actor>))
+SubClassOf(<http://www.semanticweb.org/matac93/ontology/fao#Actor> <http://www.semanticweb.org/matac93/ontology/fao#Person>)
+Declaration(Class(<http://www.semanticweb.org/matac93/ontology/fao#Director>))
+SubClassOf(<http://www.semanticweb.org/matac93/ontology/fao#Director> <http://www.semanticweb.org/matac93/ontology/fao#Person>)
 Declaration(Class(<http://www.semanticweb.org/matac93/ontology/fao#Page>))
 Declaration(Class(<http://www.semanticweb.org/matac93/ontology/fao#Person>))
 Declaration(ObjectProperty(<http://www.semanticweb.org/matac93/ontology/fao#activities>))
