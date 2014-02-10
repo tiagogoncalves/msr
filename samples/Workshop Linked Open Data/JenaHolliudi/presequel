@@ -6,19 +6,32 @@ PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
 
-CONSTRUCT { ?film a movie:film. 
-?film rdfs:label ?label.   
+CONSTRUCT { ?film a movie:film.
+?film rdfs:label ?label.
 ?film movie:prequel ?prequel.
 ?film movie:sequel ?sequel.
 ?film movie:actor ?starring.
 ?film movie:director ?director.
 ?film movie:producer ?producer.
 ?film movie:writer ?writer.
-?dbpediaLink dbpprop:books ?books. } 
+?dbpediaLink dbpprop:country ?country.
+?dbpediaLink dbpprop:genre ?genre.
+?dbpediaLink dbpprop:precededBy ?precededBy.
+?dbpediaLink dbpprop:language ?language. }
 
 WHERE {
-	SERVICE <http://data.linkedmdb.org/sparql> {
-    	  ?film a movie:film.
+
+SERVICE <http://dbpedia.org/sparql> {
+    ?dbpediaLink a <http://dbpedia.org/ontology/Film>.
+OPTIONAL {?dbpediaLink dbpprop:country ?country.
+?dbpediaLink dbpprop:genre ?genre.
+?dbpediaLink dbpprop:precededBy ?precededBy.
+?dbpediaLink dbpprop:language ?language.
+?dbpediaLink owl:sameAs ?film.}
+FILTER(regex(str(?film), "linkedmdb", "i")).
+}
+
+SERVICE <http://data.linkedmdb.org/sparql> {
 
 ?film rdfs:label ?label.
 OPTIONAL {?film movie:prequel ?prequel.
@@ -27,11 +40,9 @@ OPTIONAL {?film movie:prequel ?prequel.
 ?film movie:director ?director.
 ?film movie:producer ?producer.
 ?film movie:writer ?writer}.
-?film owl:sameAs ?dbpediaLink. 
 }
 
-SERVICE <http://dbpedia.org/sparql>{
-	?dbpediaLink dbpprop:books ?books
-}
+
 
 }
+LIMIT 10

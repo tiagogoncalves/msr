@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.PropertyConfigurator;
@@ -15,13 +14,6 @@ import org.apache.log4j.PropertyConfigurator;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.ResIterator;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.ufba.iws.content.Film;
 
 public class FilmSPARQL {
@@ -32,7 +24,7 @@ public class FilmSPARQL {
 		List<Film> films = null;
 		
         PropertyConfigurator.configure("jena-log4j.properties");
-        String path = "presequel";
+        String path = "query";
 
         byte[] encoded = Files.readAllBytes(Paths.get(path));
         String queryString = StandardCharsets.UTF_8.decode(ByteBuffer.wrap(encoded)).toString();
@@ -41,6 +33,7 @@ public class FilmSPARQL {
         String service = "http://data.linkedmdb.org/sparql";
 
         QueryExecution qe = QueryExecutionFactory.sparqlService(service,queryString);
+        //QueryExecution qe = Querr
        // System.out.println("okk");
         try {
         	films = new ArrayList<Film>();
@@ -50,15 +43,15 @@ public class FilmSPARQL {
   //      	ResultSetFormatter.out(System.out, results, query); 
         	
     //    	QueryExecution qe = QueryExecutionFactory.create(query, oracleSemModel) ;
-      //  	Model model = qe.execConstruct();
-        	
         	Model model = qe.execConstruct();
+        	
+        	//Model model = qe.execConstruct();
         	
         	//Model model = ModelFactory.createDefaultModel();
         	
         	//model.read("rdfLinked");
         	
-        	FileWriter fw = new FileWriter(new File("rdfLinkedDbPedia"));
+        	FileWriter fw = new FileWriter(new File("rdfLinkedQ"));
         	
         	model.write(fw, "RDF/XML-ABBREV");
 //        	ResIterator it = model.listSubjects();

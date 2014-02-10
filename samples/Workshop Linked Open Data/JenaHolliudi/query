@@ -1,18 +1,27 @@
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX dbpprop: <http://dbpedia.org/property/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX dbpprop: <http://dbpedia.org/property/> 
 
-SELECT (str(?filmLb) as ?filmLabel) (str(?direc) as ?directorName) (str(?cntr) as ?country) ?film (str(?descrip) as ?description) WHERE {
-?film rdf:type <http://dbpedia.org/ontology/Film>.
-?film dbpprop:name ?filmLb.
-?film dbpedia-owl:director ?director.
-?director foaf:name ?direc.
-?film dbpprop:country ?cntr.
-?film dbpedia-owl:abstract ?descrip.
-
-FILTER( lang(?descrip) = "en" )
-  
-}
-LIMIT 20
+CONSTRUCT{
+?film a movie:film.
+     ?film rdfs:label ?label.
+     ?film movie:prequel ?prequel.
+     ?film movie:sequel ?sequel.
+     ?film movie:actor ?starring.
+     ?film movie:director ?director.}
+WHERE {
+SERVICE <http://data.linkedmdb.org/sparql> {
+     ?film a movie:film.
+?film rdfs:label ?label.
+     OPTIONAL{?film movie:prequel ?prequel.
+     ?film movie:sequel ?sequel.
+     ?film movie:actor ?starring.
+     ?film movie:director ?director.
+  ?film movie:producer ?producer.
+   ?film movie:writer ?writer}.
+   }
+   } 
