@@ -23,6 +23,7 @@ import uk.ac.manchester.cs.owlapi.dlsyntax.DLSyntaxObjectRenderer;
 import br.ufba.matac93.msr.utils.OntologyMethods;
 
 import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
+import com.hp.hpl.jena.ontology.Ontology;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.ResIterator;
@@ -33,11 +34,12 @@ public class Main2Teste {
 
 	private static OWLObjectRenderer renderer = new DLSyntaxObjectRenderer();
 	private static final String namSpaceLinkedMD = "http://www.semanticweb.org/matc93/ontology/linkedmdb_lite";
+	private static final String nameSpaceFao = "http://www.semanticweb.org/matc93/ontology/fao";
 	private static final String nameSpaceMovie = "http://data.linkedmdb.org/resource/movie/";
 	private static final String dbPediaProperty = "http://dbpedia.org/property/";
-
+	private static final String ns = "http://dbpedia.org/matc93/ontology/dbpedia_lite";
 	public static void main(String[] args) throws OWLOntologyCreationException {
-		String ns = "http://dbpedia.org/matc93/ontology/dbpedia_lite";
+		
 
 		OWLOntologyManager manager2 = OWLManager.createOWLOntologyManager();
 
@@ -56,13 +58,24 @@ public class Main2Teste {
 		model.read("MSR/rdfLinkedQY");
 
 		ResIterator it = model.listSubjects();
+		
+		OWLIndividual personTeste =  OntologyMethods
+				 .addIndividual(nameSpaceFao, "#Person", "Peter", manager2, ontology2);
 
+		int i = 0;
+		
 		while (it.hasNext()) {
+			
+			i++;
 
 			Resource r = it.nextResource();
 
 			OWLIndividual individual = OntologyMethods.addIndividual(ns,
 					"Film", r.getURI(), manager2, ontology2);
+			
+			if(i==1){
+				OntologyMethods.addIndividualOnObjProperty(ns, personTeste, r.getURI(), manager2, ontology2, "#watch");
+			}
 
 			Statement stmt2 = r.getRequiredProperty(model
 					.getProperty("http://www.w3.org/2000/01/rdf-schema#label"));
@@ -139,9 +152,8 @@ public class Main2Teste {
 
 		}
 
-		// OntologyMethods
-		// .addIndividual(ns, "Film", "HomemAranha", manager2, ontology2);
-		//
+		
+		
 		OWLReasoner reasoner2 = reasonerFactory2.createReasoner(ontology2,
 				new SimpleConfiguration());
 
@@ -152,33 +164,61 @@ public class Main2Teste {
 
 		String strNs = "<" + ns;
 
-		OWLClass personClass2 = factory2.getOWLClass(strNs + "Film>", pm2);
-
-		for (OWLNamedIndividual person : reasoner2.getInstances(personClass2,
-				false).getFlattened()) {
-//			System.out.println("Movies : " + renderer.render(person));
-//
-//			OWLDataProperty dataP = factory2.getOWLDataProperty("<"+dbPediaProperty
-//					+ "#language>", pm2);
-//
-//			for (OWLLiteral ind : reasoner2
-//					.getDataPropertyValues(person, dataP)) {
-//				System.out.println("Teste lang: " + renderer.render(ind));
-//			}
-			
+		OWLClass personClass2 = factory2.getOWLClass("<" + nameSpaceFao+ "#Person>", pm2);
 		
+		searchMovieWithLabe("Network", ontology2, manager2, factory2, pm2, reasoner2);
+		
+		//OWLDataProperty dataPrp = reasoner2.getInstances(factory2.getOWLDataProperty(strNs+"#label", pm2),false);
+		
+
+//		for (OWLNamedIndividual person : reasoner2.getInstances(personClass2,
+//				false).getFlattened()) {
+////			System.out.println("Movies : " + renderer.render(person));
+////
+////			OWLDataProperty dataP = factory2.getOWLDataProperty(strNs
+////					+ "#label>", pm2);
+////
+////			for (OWLLiteral ind : reasoner2
+////					.getDataPropertyValues(person, dataP)) {
+////				System.out.println("Teste lang: " + renderer.render(ind));
+////			}
+////			
+////		
+////			
+//			OWLObjectProperty propConhece = factory2.getOWLObjectProperty(strNs
+//					+ "#watch>", pm2);
+//
+//			for (OWLNamedIndividual ind : reasoner2.getObjectPropertyValues(
+//					person, propConhece).getFlattened()) {
+//				System.out.println(renderer.render(person) + "\t" + ind.toString());
+//			}
+
+
+//		}
+
+	}
+	
+	public static void searchMovieWithLabe(String label, OWLOntology onto, OWLOntologyManager manager, OWLDataFactory factory, 
+			PrefixOWLOntologyFormat pm2, OWLReasoner reasoner2){
+		OWLClass movieClass = factory.getOWLClass("<" + ns + "Film>", pm2);
+		
+		for (OWLNamedIndividual person : reasoner2.getInstances(movieClass,
+				false).getFlattened()) {
 			
-			OWLObjectProperty propConhece = factory2.getOWLObjectProperty("<"+ namSpaceLinkedMD
-					+ "#prequel>", pm2);
+			OWLDataProperty dataP = factory.getOWLDataProperty("<" + ns
+				+ "#label>", pm2);
 
-			for (OWLNamedIndividual ind : reasoner2.getObjectPropertyValues(
-					person, propConhece).getFlattened()) {
-				System.out.println(renderer.render(person) + "\t" + ind.toString());
+		for (OWLLiteral ind : reasoner2
+				.getDataPropertyValues(person, dataP)) {
+			//System.out.println("Teste lang: " + renderer.render(ind));
+			if(label.equals(renderer.render(ind))){
+				System.out.println(renderer.render(person));
 			}
-
-
+			
 		}
-
+					
+		}
+		
 	}
 
 }
