@@ -65,8 +65,7 @@ public class Wol2Tutorial {
 		//
 		// manager2.applyChange(addAxiom);
 
-		OntologyMethods
-				.addIndividual(ns, "Pessoa", "John", manager2, ontology2);
+		OntologyMethods.addIndividual(ns, "Pessoa", "John", manager2, ontology2);
 
 		OWLReasoner reasoner2 = reasonerFactory2.createReasoner(ontology2,
 				new SimpleConfiguration());
