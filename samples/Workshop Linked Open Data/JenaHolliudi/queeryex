@@ -16,9 +16,9 @@ CONSTRUCT {?film a movie:film .
 	SERVICE <http://data.linkedmdb.org/sparql> {
     	?film a movie:film .
     	?film rdfs:label ?label .
-    	?film  movie:featured_film_location  ?location.
+    	OPTIONAL {?film  movie:featured_film_location  ?location.
     	?location movie:film_location_name ?locname.
-    	OPTIONAL {?film owl:sameAs ?dbpediaLink}.
+    	?film owl:sameAs ?dbpediaLink}.
 
 FILTER(regex(str(?dbpediaLink), "dbpedia", "i")).
 

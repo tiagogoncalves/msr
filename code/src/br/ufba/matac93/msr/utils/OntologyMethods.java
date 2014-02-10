@@ -24,7 +24,7 @@ public class OntologyMethods {
 		// IRI ontologyIRI = IRI.create(uri + nameClass);
 
 		OWLIndividual individual = factory.getOWLNamedIndividual(IRI.create(uri
-				+ "#"+nameIndividual));
+				+ "#" + nameIndividual));
 		OWLClass relatedClass = factory
 				.getOWLClass(IRI.create(uri + nameClass));
 
@@ -34,37 +34,45 @@ public class OntologyMethods {
 		AddAxiom addAxiom = new AddAxiom(ontology, axiom1);
 
 		manager.applyChange(addAxiom);
-		
+
 		return individual;
 	}
-	
+
 	public static void addDataProperty(String uri, String nameData,
-			String valueData, OWLIndividual individual, OWLOntologyManager manager,
-			OWLOntology ontology) {
+			String valueData, OWLIndividual individual,
+			OWLOntologyManager manager, OWLOntology ontology) {
 
-		OWLDataFactory factory = manager.getOWLDataFactory();		
-		
-		OWLDataProperty dataProperty = factory.getOWLDataProperty(IRI.create(uri +"#"+nameData));
+		OWLDataFactory factory = manager.getOWLDataFactory();
 
-		OWLDataPropertyAssertionAxiom axiom1 = factory.getOWLDataPropertyAssertionAxiom(dataProperty, individual, valueData);
-		
+		OWLDataProperty dataProperty = factory.getOWLDataProperty(IRI
+				.create(uri + "#" + nameData));
+
+		OWLDataPropertyAssertionAxiom axiom1 = factory
+				.getOWLDataPropertyAssertionAxiom(dataProperty, individual,
+						valueData);
+
 		AddAxiom addAxiom = new AddAxiom(ontology, axiom1);
 
 		manager.applyChange(addAxiom);
 	}
-	
-	public static void addIndividualOnObjProperty(String uri, OWLIndividual individualFrom, String uriIndividualRange, 
-			OWLOntologyManager manager,
-			OWLOntology ontology, String propertyName) {
+
+	public static void addIndividualOnObjProperty(String uri,
+			OWLIndividual individualFrom, String uriIndividualRange,
+			OWLOntologyManager manager, OWLOntology ontology,
+			String propertyName) {
 
 		OWLDataFactory factory = manager.getOWLDataFactory();
 
-		OWLObjectProperty objProperty = factory.getOWLObjectProperty(IRI.create(uri+propertyName));
-		
-		OWLIndividual indRange = factory.getOWLNamedIndividual(IRI.create(uriIndividualRange));
-		
-		OWLObjectPropertyAssertionAxiom axiom1 = factory.getOWLObjectPropertyAssertionAxiom(objProperty, individualFrom, indRange);
-		
+		OWLObjectProperty objProperty = factory.getOWLObjectProperty(IRI
+				.create(uri + propertyName));
+
+		OWLIndividual indRange = factory.getOWLNamedIndividual(IRI
+				.create(uriIndividualRange));
+
+		OWLObjectPropertyAssertionAxiom axiom1 = factory
+				.getOWLObjectPropertyAssertionAxiom(objProperty,
+						individualFrom, indRange);
+
 		AddAxiom addAxiom = new AddAxiom(ontology, axiom1);
 
 		manager.applyChange(addAxiom);
