@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(../fonts/open_sans/open_sans_normal.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(../fonts/open_sans/open_sans_bold.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Open Sans Italic'), local('OpenSans-Italic'), url(../fonts/open_sans/open_sans_italic.woff) format('woff');
+}
+@font-face {
+ 	font-family: 'Museo';
+ 	src: url('../fonts/museo/24739A_0_0.eot');
+ 	src: url('../fonts/museo/24739A_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/museo/24739A_0_0.woff') format('woff'),url('../fonts/museo/24739A_0_0.ttf') format('truetype');
+ }
