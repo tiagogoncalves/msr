@@ -1,0 +1,33 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dbpprop: <http://dbpedia.org/property/>
+
+CONSTRUCT {?film a movie:film .
+    	?film rdfs:label ?label .
+    	?film  movie:featured_film_location  ?location.
+    	?location movie:film_location_name ?locname.
+    	?dbpediaLink rdfs:comment ?comment }    	
+    	
+    	WHERE {
+	SERVICE <http://data.linkedmdb.org/sparql> {
+    	?film a movie:film .
+    	?film rdfs:label ?label .
+    	?film  movie:featured_film_location  ?location.
+    	?location movie:film_location_name ?locname.
+    	OPTIONAL {?film owl:sameAs ?dbpediaLink}.
+
+FILTER(regex(str(?dbpediaLink), "dbpedia", "i")).
+
+
+}
+SERVICE <http://dbpedia.org/sparql> {
+    	?dbpediaLink rdfs:comment ?comment
+	}
+
+}
+
+LIMIT 10
