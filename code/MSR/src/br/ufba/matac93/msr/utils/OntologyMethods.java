@@ -69,5 +69,22 @@ public class OntologyMethods {
 
 		manager.applyChange(addAxiom);
 	}
+	
+	public static void addIndividualOnObjProperty(String uri, OWLIndividual individualFrom, OWLIndividual individualRange, 
+			OWLOntologyManager manager,
+			OWLOntology ontology, String propertyName) {
+
+		OWLDataFactory factory = manager.getOWLDataFactory();
+
+		OWLObjectProperty objProperty = factory.getOWLObjectProperty(IRI.create(uri+propertyName));
+		
+		OWLIndividual indRange = individualRange;
+		
+		OWLObjectPropertyAssertionAxiom axiom1 = factory.getOWLObjectPropertyAssertionAxiom(objProperty, individualFrom, indRange);
+		
+		AddAxiom addAxiom = new AddAxiom(ontology, axiom1);
+
+		manager.applyChange(addAxiom);
+	}
 
 }
