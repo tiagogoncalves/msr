@@ -10,6 +10,7 @@ import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -32,6 +33,7 @@ public class Main2Teste {
 
 	private static OWLObjectRenderer renderer = new DLSyntaxObjectRenderer();
 	private static final String namSpaceLinkedMD = "http://www.semanticweb.org/matc93/ontology/linkedmdb_lite#prequel";
+	private static final String nameSpaceMovie = "http://data.linkedmdb.org/resource/movie/";
 
 	public static void main(String[] args) throws OWLOntologyCreationException {
 		String ns = "http://dbpedia.org/matc93/ontology/dbpedia_lite";
@@ -50,7 +52,7 @@ public class Main2Teste {
 
 		Model model = ModelFactory.createDefaultModel();
 
-		model.read("rdfLinked");
+		model.read("rdfLinkedQY");
 
 		ResIterator it = model.listSubjects();
 
@@ -61,17 +63,20 @@ public class Main2Teste {
 			OWLIndividual individual = OntologyMethods.addIndividual(ns,
 					"Film", r.getURI(), manager2, ontology2);
 
-			// System.out.println(r.getURI());
-
 			Statement stmt2 = r.getRequiredProperty(model
 					.getProperty("http://www.w3.org/2000/01/rdf-schema#label"));
 
 			OntologyMethods.addDataProperty(ns, "label", stmt2.getString(),
 					individual, manager2, ontology2);
 
-			// System.out.println(stmt2.getString());
+			Resource r2 = r.getPropertyResourceValue(model
+					.getProperty(nameSpaceMovie + "genre"));
 
-			//
+			if (r2 != null) {
+				OntologyMethods.addIndividualOnObjProperty(ns, individual,
+						r2.getURI(), manager2, ontology2, "genre");
+			}
+
 		}
 
 		// OntologyMethods
@@ -100,6 +105,15 @@ public class Main2Teste {
 					.getDataPropertyValues(person, dataP)) {
 				System.out.println("Teste label: " + renderer.render(ind));
 			}
+			
+			OWLObjectProperty propConhece = factory2.getOWLObjectProperty(strNs
+					+ "genre>", pm2);
+
+//			for (OWLNamedIndividual ind : reasoner2.getObjectPropertyValues(
+//					person, propConhece).getFlattened()) {
+//				System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+//				System.out.println("Joao conhece: " + ind.toString());
+//			}
 
 		}
 

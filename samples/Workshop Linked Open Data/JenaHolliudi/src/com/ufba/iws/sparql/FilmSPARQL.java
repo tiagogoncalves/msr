@@ -51,7 +51,7 @@ public class FilmSPARQL {
         	
         	//model.read("rdfLinked");
         	
-        	FileWriter fw = new FileWriter(new File("rdfLinkedQ"));
+        	FileWriter fw = new FileWriter(new File("rdfLinkedQY"));
         	
         	model.write(fw, "RDF/XML-ABBREV");
 //        	ResIterator it = model.listSubjects();
