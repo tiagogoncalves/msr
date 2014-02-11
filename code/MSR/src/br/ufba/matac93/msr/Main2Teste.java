@@ -103,7 +103,8 @@ public class Main2Teste {
 			
 			StmtIterator its = r.listProperties(model.getProperty(nameSpaceMovie + "genre"));
 						
-			if (its != null) {
+			if (its != null) {			
+								
 				Statement stmV ;
 				for(; its.hasNext();   ){
 					stmV = its.next();
@@ -130,8 +131,8 @@ public class Main2Teste {
 					OWLIndividual actorT = OntologyMethods.addIndividual(nameSpaceFao,
 							"#Actor", stmV.getResource().getURI(), manager2, ontology2);
 					
-					OntologyMethods.addIndividualOnObjProperty(ns, individual,
-							stmV.getResource().getURI(), manager2, ontology2, "genre");
+					//OntologyMethods.addIndividualOnObjProperty(ns, individual,
+					//		stmV.getResource().getURI(), manager2, ontology2, "genre");
 					OntologyMethods.addIndividualOnObjProperty(ns, individual, actorT, manager2, ontology2, "starring");
 				}		
 				
@@ -294,8 +295,8 @@ public class Main2Teste {
 
 		String strNs = "<" + ns;
 
-		OWLClass personClass2 = factory2.getOWLClass("<" + nameSpaceFao
-				+ "#Person>", pm2);
+		OWLClass personClass2 = factory2.getOWLClass("<" + ns
+				+ "Film>", pm2);
 
 		// OWLDataProperty dataPrp =
 		// reasoner2.getInstances(factory2.getOWLDataProperty(strNs+"#label",
@@ -316,9 +317,9 @@ public class Main2Teste {
 			// //
 			// //
 			OWLObjectProperty propConhece = factory2.getOWLObjectProperty("<" + ns
-					+ "#watchLater>", pm2);
+					+ "genre>", pm2);
 			
-			System.out.println(renderer.render(person));
+			//System.out.println(renderer.render(person));
 			
 			//System.out.println(renderer.render(person));
 
