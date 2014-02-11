@@ -49,8 +49,7 @@ public class Main2Teste {
 
 		OWLOntology ontology2 = manager2
 				.loadOntologyFromOntologyDocument(new File("dbpedia_lite_sem_regras.owl"));
-		OWLReasonerFactory reasonerFactory2 = PelletReasonerFactory
-				.getInstance();
+		OWLReasonerFactory reasonerFactory2 = PelletReasonerFactory.getInstance();
 
 		OWLDataFactory factory2 = manager2.getOWLDataFactory();
 
@@ -102,31 +101,6 @@ public class Main2Teste {
 			// /pegando os generos
 			Resource r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie + "genre"));
 			
-			//Pegando os atores
-			Resource r3 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie + "actor"));
-			if(r3!=null){
-				Property p = model.getProperty(nameSpaceMovie+"actor_name");
-				if(r3.getProperty(p)!=null)
-					System.out.println("actor:"+r3.getProperty(p).getObject().toString());
-			}
-			
-			//Pegando os diretores
-			Resource r4 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie + "director"));
-			if(r4!=null){
-				Property p = model.getProperty(nameSpaceMovie+"director_name");
-				if(r4.getProperty(p)!=null)
-					System.out.println("director:"+r4.getProperty(p).getObject().toString());
-			}
-			
-			//Pegando os diretores
-			Resource r5 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie + "writer"));
-			if(r5!=null){
-				Property p = model.getProperty(nameSpaceMovie+"writer_name");
-				if(r5.getProperty(p)!=null)
-					System.out.println("writer:"+r5.getProperty(p).getObject().toString());
-			}
-			
-			
 			
 			StmtIterator its = r.listProperties(model.getProperty(nameSpaceMovie + "genre"));
 			
@@ -143,8 +117,7 @@ public class Main2Teste {
 
 			// pegando os atores					
 
-			r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie
-					+ "actor"));
+			r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie+ "actor"));
 			
 			its = r.listProperties(model.getProperty(nameSpaceMovie + "actor"));
 			
@@ -153,8 +126,10 @@ public class Main2Teste {
 				for(; its.hasNext();   ){
 					stmV = its.next();
 					
-					OWLIndividual actorT = OntologyMethods.addIndividual(nameSpaceFao,
-							"#Actor", stmV.getResource().getURI(), manager2, ontology2);
+					Property p = model.getProperty(nameSpaceMovie+"actor_name");
+					System.out.println("actor:"+stmV.getResource().getProperty(p).getObject().toString());
+					
+					OWLIndividual actorT = OntologyMethods.addIndividual(nameSpaceFao,"#Actor", stmV.getResource().getURI(), manager2, ontology2);
 					
 					//OntologyMethods.addIndividualOnObjProperty(ns, individual,
 					//		stmV.getResource().getURI(), manager2, ontology2, "genre");
@@ -196,9 +171,9 @@ public class Main2Teste {
 				for(; its.hasNext();   ){
 					stmV = its.next();
 					
-					OWLIndividual writerT = OntologyMethods.addIndividual(nameSpaceFao,
-							"#Writer", stmV.getResource().getURI(), manager2, ontology2);
-					
+					OWLIndividual writerT = OntologyMethods.addIndividual(nameSpaceFao,"#Writer", stmV.getResource().getURI(), manager2, ontology2);
+					Property p = model.getProperty(nameSpaceMovie+"writer_name");
+					System.out.println("writer:"+stmV.getResource().getProperty(p).getObject().toString());
 					OntologyMethods.addIndividualOnObjProperty(ns, individual, writerT, manager2, ontology2, "writer");
 				
 				}		
@@ -217,8 +192,9 @@ public class Main2Teste {
 				for(; its.hasNext();   ){
 					stmV = its.next();
 					
-					OWLIndividual directorT = OntologyMethods.addIndividual(nameSpaceFao,
-							"#Director", stmV.getResource().getURI(), manager2, ontology2);
+					OWLIndividual directorT = OntologyMethods.addIndividual(nameSpaceFao,"#Director", stmV.getResource().getURI(), manager2, ontology2);
+					Property p = model.getProperty(nameSpaceMovie+"director_name");
+					System.out.println("director:"+stmV.getResource().getProperty(p).getObject().toString());
 					
 					OntologyMethods.addIndividualOnObjProperty(ns, individual, directorT, manager2, ontology2, "director");
 				
@@ -247,8 +223,7 @@ public class Main2Teste {
 
 			// filmes sequel de outro filme
 
-			r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie
-					+ "sequel"));
+			r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie+ "sequel"));
 			if (r2 != null) {
 
 				OntologyMethods
