@@ -47,7 +47,7 @@ public class Main2Teste {
 		manager2.loadOntologyFromOntologyDocument(new File("linkedmdb_lite.owl"));
 
 		OWLOntology ontology2 = manager2
-				.loadOntologyFromOntologyDocument(new File("dbpedia_lite.owl"));
+				.loadOntologyFromOntologyDocument(new File("dbpedia_lite_sem_regras.owl"));
 		OWLReasonerFactory reasonerFactory2 = PelletReasonerFactory
 				.getInstance();
 
@@ -194,8 +194,8 @@ public class Main2Teste {
 
 		String strNs = "<" + ns;
 
-		OWLClass personClass2 = factory2.getOWLClass("<" + nameSpaceFao
-				+ "#Person>", pm2);
+		OWLClass personClass2 = factory2.getOWLClass("<" + ns
+				+ "Film>", pm2);
 
 		// OWLDataProperty dataPrp =
 		// reasoner2.getInstances(factory2.getOWLDataProperty(strNs+"#label",
@@ -203,10 +203,10 @@ public class Main2Teste {
 
 		for (OWLNamedIndividual person : reasoner2.getInstances(personClass2,
 				false).getFlattened()) {
-			System.out.println("Movies : " + renderer.render(person));
+			//System.out.println("Movies : " + renderer.render(person));
 			// //
-			OWLDataProperty dataP = factory2.getOWLDataProperty(strNs
-					+ "#watch>", pm2);
+		//	OWLDataProperty dataP = factory2.getOWLDataProperty(strNs
+			//		+ "#watch>", pm2);
 
 			// for (OWLLiteral ind : reasoner2
 			// .getDataPropertyValues(person, dataP)) {
@@ -216,14 +216,18 @@ public class Main2Teste {
 			// //
 			// //
 			OWLObjectProperty propConhece = factory2.getOWLObjectProperty(strNs
-					+ "#watch>", pm2);
+					+ "writer>", pm2);
+			
+			//System.out.println(renderer.render(person));
 
 			// OntologyMethods.addIndividualOnObjProperty(ns, person,
 			// filmeLab.toString(), manager2, ontology2, "#watch");
 
+			//OWLNamedIndividual indNa = factory2.getOWLNamedIndividual("<" + ns+"Peter>",pm2);
+			
 			for (OWLNamedIndividual ind : reasoner2.getObjectPropertyValues(
 					person, propConhece).getFlattened()) {
-				System.out.println(renderer.render(person) + "\t"
+				System.out.println(renderer.render(personTeste) + "\t"
 						+ ind);
 			}
 
