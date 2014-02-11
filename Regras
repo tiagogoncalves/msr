@@ -1,0 +1,32 @@
+Regra 1
+
+Person(?p), Movie(?m), Movie(?n), watchLater(?p, ?m), sequel(?m, ?n) -> watchLater(?p, ?n)
+
+
+Regra 2
+
+Person(?p), Movie(?m), Movie(?n), watch(?p, ?m), sequel(?m, ?n) -> watchLater(?p, ?n)
+
+Regra 3
+
+Actor(?ac), Person(?p), Movie(?m), Movie(?m2), genre(?m, ?g1), genre(?m2, ?g1), starring(?m, ?ac), starring(?m2, ?ac), watch(?p, ?m), likes(?p, ?ac) -> watchLater(?p, ?m2)
+
+Regra 4
+
+Director(?d), Person(?p), Person(?p2), Movie(?m), Movie(?m2), director(?m, ?d), director(?m2, ?d), watch(?p, ?m), watch(?p2, ?m2), relationship(?p, ?p2) -> watchLater(?p, ?m2)
+
+Regra 5 (adicionada)
+
+Person(?p), Movie(?m), Movie(?n), watch(?p, ?m), prequel(?m, ?n) -> watchLater(?p, ?n)
+
+Regra 6
+
+Person(?p), Writer(?w), Movie(?m), writer(?m, ?w), likes(?p, ?w) -> watchLater(?p, ?m)
+
+Regra 7
+
+Person(?p), Movie(?m), Movie(?n), watchLater(?p, ?m), prequel(?m, ?n) -> watchLater(?p, ?n)
+
+Regra 8
+
+Person(?p), Person(?p2), Person(?p3), Movie(?m), Movie(?m2), Movie(?m3), genre(?m, ?g1), genre(?m2, ?g1), genre(?m3, ?g1), watch(?p, ?m), watch(?p2, ?m2), watch(?p3, ?m3), relationship(?p, ?p2), relationship(?p, ?p3) -> watchLater(?p, ?m2), watchLater(?p, ?m3)

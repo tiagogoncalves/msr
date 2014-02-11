@@ -48,7 +48,7 @@ public class Main2Teste {
 		manager2.loadOntologyFromOntologyDocument(new File("linkedmdb_lite.owl"));
 
 		OWLOntology ontology2 = manager2
-				.loadOntologyFromOntologyDocument(new File("dbpedia_lite_final.owl"));
+				.loadOntologyFromOntologyDocument(new File("dbpedia_lite_sem_regras.owl"));
 		OWLReasonerFactory reasonerFactory2 = PelletReasonerFactory.getInstance();
 
 		OWLDataFactory factory2 = manager2.getOWLDataFactory();
@@ -271,17 +271,17 @@ public class Main2Teste {
 			OntologyMethods.addIndividualOnObjProperty(ns, personTeste,directorLab, manager2, ontology2, "#likes");
 			OntologyMethods.addIndividualOnObjProperty(ns, personTeste,writerLab, manager2, ontology2, "#likes");
 			
+			
 
 		}
 		
-		OWLNamedIndividual filmeLab2 = searchMovieWithLabel("Anacondas: The Hunt for the Blood Orchid",
-				ontology2, manager2, factory2, pm2, reasoner2);
+		OWLNamedIndividual filmeLab2 = searchMovieWithLabel("The Return of the King",	ontology2, manager2, factory2, pm2, reasoner2);
 		
 		if (filmeLab2 != null) {
 			System.out.println("Voltou2");
 			
-			OntologyMethods.addIndividualOnObjProperty(ns, personTeste,
-					filmeLab2, manager2, ontology2, "#watch");
+//			OntologyMethods.addIndividualOnObjProperty(ns, personTeste,filmeLab2, manager2, ontology2, "#watch");
+			OntologyMethods.addIndividualOnObjProperty(ns, personTeste,filmeLab2, manager2, ontology2, "#watch");
 
 		}
 		
@@ -326,7 +326,7 @@ public class Main2Teste {
 			// //
 			// //
 			// //
-			OWLObjectProperty propConhece = factory2.getOWLObjectProperty("<" + ns + "genre>", pm2);
+			OWLObjectProperty propConhece = factory2.getOWLObjectProperty("<" + ns + "#watchLater>", pm2);
 			
 			//System.out.println(renderer.render(person));
 			
@@ -340,8 +340,7 @@ public class Main2Teste {
 			for (OWLNamedIndividual ind : reasoner2.getObjectPropertyValues(
 					person, propConhece).getFlattened()) {
 				
-				System.out.println(renderer.render(person) + "\t"
-						+ ind);
+				System.out.println("inferência: "+renderer.render(person) + "\t"+ ind);
 				
 //				OWLObjectProperty propConhece2 = factory2.getOWLObjectProperty("<" + ns
 //						+ "genre>", pm2);
