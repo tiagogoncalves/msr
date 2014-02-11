@@ -17,28 +17,21 @@ $(document).ready(function(){
 		cookie     : true, // enable cookies to allow the server to access the session
 		xfbml      : true  // parse XFBML
 	});
-
+	
+	fb_login = false;
 	//Isto fica escutando todas as mudanças na conexão com facebook
 	FB.Event.subscribe('auth.authResponseChange', function(response) 
 	{
 		//SUCCESS
 		//Assim que conectado a magia acontece no html
-	 	if (response.status === 'connected')
+	 	if (response.status === 'connected' && !fb_login)
 	 	{
-	 		setTimeout(function(){
-	 			$("#content").fadeOut(200);
-	 			$("#linkedmovies").show();
-
-	 			//Obter dados do facebook
-	 			fbGetData();
-	 		},500);
+	 		fb_login = true;
+	 		fbLogin();
 	 	} 
 	  	
 	  	//FAILED	 
-		else if (response.status === 'not_authorized') alert("Falha na conexão ao Facebook");
-
-		//UNKNOWN ERROR
-	    else alert("Deslogado");
+		else if (response.status === 'not_authorized') console.log("Falha na conex�o ao Facebook");
 	});
 
 	//Se não tiver logado, clicar no botão pra logar disparará este evento
@@ -54,9 +47,18 @@ function fbLogin()
 	{
 		if (!response.authResponse)
 			console.log('Falha no login');
+		else
+		{
+ 			$("#content").fadeOut(200);
+ 			$("#linkedmovies").fadeIn(300);
+	 		setTimeout(function(){
+	 			//Obter dados do facebook
+	 			fbGetData();
+	 		},300);			
+		}
 
 	 //scope são as propriedades que usuário vai permitir o app pegar no perfil do cara	
-	 },{scope: 'email,user_photos,user_likes,friends_likes'});
+	 },{scope: 'user_photos,user_likes,friends_likes,user_birthday,user_religion_politics,user_subscriptions'});
 }
 
 //Obter dados do facebook
@@ -64,7 +66,7 @@ function fbGetData()
 {
 	//Da pra usar essa implementação básica do Face pra pegar dados ou usar Facebook Query Language
 	//Para mais em user_fields ver https://developers.facebook.com/docs/graph-api/reference/user/
-	var user_fields = 'id,name,first_name,last_name,gender,picture.type(large),age_range,movies,likes';
+	var user_fields = 'birthday,first_name,last_name,gender,picture.type(large),movies,likes.limit(5),hometown,subscribedto.limit(5),religion';
 	FB.api('/me?fields='+user_fields,function(response) 
 	{	
 		//Visualizar dados no console
@@ -74,6 +76,16 @@ function fbGetData()
 		//Gerar Html dos dados obtidos
 		fbShowUserInfo(response);
 	});
+	
+/*
+ * Modelo pra usar FQL
+ * FB.api({
+    method: 'fql.query',
+    query: query
+}, function(response){
+    console.log(response);
+});
+ */	
 	
 }
 
@@ -95,10 +107,25 @@ function fbShowUserInfo(fb_data)
 		html+= "</p></div>";
 	}
 
-	else html+= "<div class='user-movies'><p>Você não curtiu filmes</p></div>";
+	else html+= "<div class='user-movies'><p>Voc� n�o curtiu filmes</p></div>";
 	
 	html+="<div class='movie-recom'><div class='loader'><p>Ligando Filmes</p><div></div></div>";
 	$(".main").append(html);
 	
-	//TODO Ajax to Java Server
+	profile_json = JSON.stringify(fb_data);
+    $.ajax({
+        type: 'POST',
+        dataType: "html",
+        url: 'http://localhost:8080/linkedmovies/RestService',
+        data:{profile:profile_json},
+        async: false,
+        success: function (data) {
+        	console.log(data);
+        },
+        error: function () {
+            console.log("Ocorreu um erro");
+        }
+    });
+
+	
 }
