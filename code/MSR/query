@@ -15,8 +15,11 @@ CONSTRUCT{
      ?film movie:language ?language.
      ?film movie:producer ?producer.
      ?film movie:writer ?writer.
+     ?starring movie:actor_name ?nameActor.
+     ?writer movie:writer_name ?nameWriter.
      ?film movie:genre ?genre.
-     ?film movie:director ?director.}
+     ?film movie:director ?director.
+     ?director movie:director_name ?nameDirector.}
 WHERE {
 SERVICE <http://data.linkedmdb.org/sparql> {
      ?film a movie:film.
