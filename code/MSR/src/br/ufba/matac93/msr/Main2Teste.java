@@ -48,7 +48,7 @@ public class Main2Teste {
 		manager2.loadOntologyFromOntologyDocument(new File("linkedmdb_lite.owl"));
 
 		OWLOntology ontology2 = manager2
-				.loadOntologyFromOntologyDocument(new File("dbpedia_lite_sem_regras.owl"));
+				.loadOntologyFromOntologyDocument(new File("dbpedia_lite_final.owl"));
 		OWLReasonerFactory reasonerFactory2 = PelletReasonerFactory.getInstance();
 
 		OWLDataFactory factory2 = manager2.getOWLDataFactory();
@@ -133,8 +133,7 @@ public class Main2Teste {
 					//OntologyMethods.addIndividualOnObjProperty(ns, individual,
 					//		stmV.getResource().getURI(), manager2, ontology2, "genre");
 					OntologyMethods.addIndividualOnObjProperty(ns, individual, actorT, manager2, ontology2, "starring");
-					
-					OntologyMethods.addDataProperty(ns, "#actor_name", stmV.getResource().getProperty(p).getObject().toString(),actorT, manager2, ontology2);
+					OntologyMethods.addDataProperty(ns, "actor_name", stmV.getResource().getProperty(p).getObject().toString(),actorT, manager2, ontology2);
 				}		
 				
 			}
@@ -250,6 +249,8 @@ public class Main2Teste {
 		if (filmeLab != null) {
 			System.out.println("Voltou");
 			
+		   
+			
 //			OWLObjectProperty propConhece2 = factory2.getOWLObjectProperty("<" + ns
 //					+ "genre>", pm2);
 //
@@ -258,8 +259,8 @@ public class Main2Teste {
 //			 System.out.println("Teste lang: " + renderer.render(ind2));
 //			 }
 			
-			OntologyMethods.addIndividualOnObjProperty(ns, personTeste,
-					filmeLab, manager2, ontology2, "#watch");
+			OntologyMethods.addIndividualOnObjProperty(ns, personTeste,filmeLab, manager2, ontology2, "#watch");
+			OntologyMethods.addIndividualOnObjProperty(ns, personTeste,actorLab, manager2, ontology2, "#likes");
 
 		}
 		
@@ -387,13 +388,9 @@ public class Main2Teste {
 					System.out.println("achei ator:"+person);
 					return person;
 				}
-
 			}
-
 		}
-
 		return null;
-
 	}
 	
 }
