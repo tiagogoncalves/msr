@@ -127,13 +127,14 @@ public class Main2Teste {
 					stmV = its.next();
 					
 					Property p = model.getProperty(nameSpaceMovie+"actor_name");
-					System.out.println("actor:"+stmV.getResource().getProperty(p).getObject().toString());
 					
 					OWLIndividual actorT = OntologyMethods.addIndividual(nameSpaceFao,"#Actor", stmV.getResource().getURI(), manager2, ontology2);
 					
 					//OntologyMethods.addIndividualOnObjProperty(ns, individual,
 					//		stmV.getResource().getURI(), manager2, ontology2, "genre");
 					OntologyMethods.addIndividualOnObjProperty(ns, individual, actorT, manager2, ontology2, "starring");
+					
+					OntologyMethods.addDataProperty(ns, "#actor_name", stmV.getResource().getProperty(p).getObject().toString(),actorT, manager2, ontology2);
 				}		
 				
 			}
@@ -377,8 +378,9 @@ public class Main2Teste {
 			OWLDataFactory factory, PrefixOWLOntologyFormat pm2,
 			OWLReasoner reasoner2) {
 		OWLClass actorClass = factory.getOWLClass("<" + nameSpaceFao + "#Actor>", pm2);
+		
 		for (OWLNamedIndividual person : reasoner2.getInstances(actorClass,	false).getFlattened()) {
-			OWLDataProperty dataP = factory.getOWLDataProperty("<"+ ns +"actor_name>", pm2);
+			OWLDataProperty dataP = factory.getOWLDataProperty("<"+ ns +"#actor_name>", pm2);
 
 			for (OWLLiteral ind : reasoner2.getDataPropertyValues(person, dataP)) {
 				if (label.equals(renderer.render(ind))) {
