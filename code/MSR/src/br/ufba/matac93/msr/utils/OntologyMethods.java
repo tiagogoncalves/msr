@@ -13,6 +13,8 @@ import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
+import br.ufba.matac93.msr.Wol2Tutorial;
+
 public class OntologyMethods {
 
 	public static OWLIndividual addIndividual(String uri, String nameClass,
@@ -53,7 +55,7 @@ public class OntologyMethods {
 		manager.applyChange(addAxiom);
 	}
 	
-	public static void addIndividualOnObjProperty(String uri, OWLIndividual individualFrom, String uriIndividualRange, 
+	public static OWLIndividual addIndividualOnObjProperty(String uri, OWLIndividual individualFrom, String uriIndividualRange, 
 			OWLOntologyManager manager,
 			OWLOntology ontology, String propertyName) {
 
@@ -63,11 +65,36 @@ public class OntologyMethods {
 		
 		OWLIndividual indRange = factory.getOWLNamedIndividual(IRI.create(uriIndividualRange));
 		
+		//OWLIndividual indRange = addIndividual(nameSpaceRange, nameSpaceRange, uriIndividualRange, manager, ontology);
+		
 		OWLObjectPropertyAssertionAxiom axiom1 = factory.getOWLObjectPropertyAssertionAxiom(objProperty, individualFrom, indRange);
 		
 		AddAxiom addAxiom = new AddAxiom(ontology, axiom1);
 
 		manager.applyChange(addAxiom);
+		
+		return indRange;
+	}
+	
+	public static OWLIndividual addIndividualOnObjProperty(String uri, OWLIndividual individualFrom, String uriIndividualRange, 
+			OWLOntologyManager manager,
+			OWLOntology ontology, String propertyName, String nameSpaceRange, String nameClassRange) {
+
+		OWLDataFactory factory = manager.getOWLDataFactory();
+
+		OWLObjectProperty objProperty = factory.getOWLObjectProperty(IRI.create(uri+propertyName));
+		
+		//OWLIndividual indRange = factory.getOWLNamedIndividual(IRI.create(uriIndividualRange));
+		
+		OWLIndividual indRange = addIndividual(nameSpaceRange, nameSpaceRange, uriIndividualRange, manager, ontology);
+		
+		OWLObjectPropertyAssertionAxiom axiom1 = factory.getOWLObjectPropertyAssertionAxiom(objProperty, individualFrom, indRange);
+		
+		AddAxiom addAxiom = new AddAxiom(ontology, axiom1);
+
+		manager.applyChange(addAxiom);
+		
+		return indRange;
 	}
 	
 	public static void addIndividualOnObjProperty(String uri, OWLIndividual individualFrom, OWLIndividual individualRange, 
