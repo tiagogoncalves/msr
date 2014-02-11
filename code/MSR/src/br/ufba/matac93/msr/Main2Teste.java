@@ -23,9 +23,9 @@ import uk.ac.manchester.cs.owlapi.dlsyntax.DLSyntaxObjectRenderer;
 import br.ufba.matac93.msr.utils.OntologyMethods;
 
 import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
-import com.hp.hpl.jena.ontology.Ontology;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
@@ -56,7 +56,10 @@ public class Main2Teste {
 
 		Model model = ModelFactory.createDefaultModel();
 
-		model.read("rdfLinkedQY");
+//		model.read("rdfLinkedQY");
+		model.read("RDFLinkedmdb4");
+		
+		
 
 		ResIterator it = model.listSubjects();
 
@@ -90,27 +93,49 @@ public class Main2Teste {
 //						r.getURI(), manager2, ontology2, "#watch");
 //			}
 
-			Statement stmt2 = r.getRequiredProperty(model
-					.getProperty("http://www.w3.org/2000/01/rdf-schema#label"));
+			if(r.toString().contains("http://data.linkedmdb.org/resource/film/")){
+				Statement stmt2 = r.getRequiredProperty(model.getProperty("http://www.w3.org/2000/01/rdf-schema#label"));
+				OntologyMethods.addDataProperty(ns, "label", stmt2.getString(),individual, manager2, ontology2);
+			}
 
-			OntologyMethods.addDataProperty(ns, "label", stmt2.getString(),
-					individual, manager2, ontology2);
-
+			
 			// /pegando os generos
-
-			Resource r2 = r.getPropertyResourceValue(model
-					.getProperty(nameSpaceMovie + "genre"));
+			Resource r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie + "genre"));
+			
+			//Pegando os atores
+			Resource r3 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie + "actor"));
+			if(r3!=null){
+				Property p = model.getProperty(nameSpaceMovie+"actor_name");
+				if(r3.getProperty(p)!=null)
+					System.out.println("actor:"+r3.getProperty(p).getObject().toString());
+			}
+			
+			//Pegando os diretores
+			Resource r4 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie + "director"));
+			if(r4!=null){
+				Property p = model.getProperty(nameSpaceMovie+"director_name");
+				if(r4.getProperty(p)!=null)
+					System.out.println("director:"+r4.getProperty(p).getObject().toString());
+			}
+			
+			//Pegando os diretores
+			Resource r5 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie + "writer"));
+			if(r5!=null){
+				Property p = model.getProperty(nameSpaceMovie+"writer_name");
+				if(r5.getProperty(p)!=null)
+					System.out.println("writer:"+r5.getProperty(p).getObject().toString());
+			}
+			
+			
 			
 			StmtIterator its = r.listProperties(model.getProperty(nameSpaceMovie + "genre"));
-						
+			
 			if (its != null) {			
 								
 				Statement stmV ;
 				for(; its.hasNext();   ){
-					stmV = its.next();
-					
-					OntologyMethods.addIndividualOnObjProperty(ns, individual,
-							stmV.getResource().getURI(), manager2, ontology2, "genre");
+					stmV = its.next();		
+					OntologyMethods.addIndividualOnObjProperty(ns, individual,stmV.getResource().getURI(), manager2, ontology2, "genre");
 				}
 				
 				

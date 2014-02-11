@@ -26,7 +26,7 @@ public class SPARQL {
         PropertyConfigurator.configure("jena-log4j.properties");
         byte[] encoded;
 		try {
-			encoded = Files.readAllBytes(Paths.get(pathDBMDBSPARQL));
+			encoded = Files.readAllBytes(Paths.get(pathDBPediaSPARQL));
 			String queryString = StandardCharsets.UTF_8.decode(ByteBuffer.wrap(encoded)).toString();
 	        QueryExecution qe = QueryExecutionFactory.sparqlService(serviceDBMDB,queryString);
 	        Model model = qe.execConstruct();

@@ -6,15 +6,37 @@ PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
 
-SELECT ?dbpediaLink ?film ?country ?genre
-
+CONSTRUCT{
+?film a movie:film.
+     ?film rdfs:label ?label.
+     ?film movie:prequel ?prequel.
+     ?film movie:sequel ?sequel.
+     ?film movie:actor ?starring.
+     ?starring movie:actor_name ?actor_name.
+     ?film movie:language ?language.
+     ?film movie:producer ?producer.
+     ?film movie:writer ?writer.
+     ?starring movie:actor_name ?nameActor.
+     ?writer movie:writer_name ?nameWriter.
+     ?film movie:genre ?genre.
+     ?genre movie:film_genre_name ?film_genre_name.
+     ?film movie:director ?director.
+     ?director movie:director_name ?nameDirector.}
 WHERE {
-	?dbpediaLink a <http://dbpedia.org/ontology/Film>.
-	OPTIONAL {
-		?dbpediaLink dbpprop:country ?country.
-		?dbpediaLink dbpprop:genre ?genre.
-		?dbpediaLink dbpprop:language ?language.
-	}
-	?dbpediaLink owl:sameAs ?film.
-	FILTER(regex(str(?film), "linkedmdb", "i")).
-}
+SERVICE <http://data.linkedmdb.org/sparql> {
+     ?film a movie:film.
+?film rdfs:label ?label.
+     OPTIONAL{?film movie:prequel ?prequel.
+     ?film movie:sequel ?sequel.
+     ?film movie:actor ?starring.
+     ?starring movie:actor_name ?actor_name.
+     ?film movie:director ?director.
+     ?writer movie:writer_name ?nameWriter.
+     ?director movie:director_name ?nameDirector.
+     ?film movie:language ?language.
+  	?film movie:producer ?producer.
+  ?film movie:genre ?genre.
+  ?genre movie:film_genre_name ?film_genre_name.
+   ?film movie:writer ?writer}.
+   }
+   }
