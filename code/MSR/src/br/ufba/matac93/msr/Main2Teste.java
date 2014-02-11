@@ -175,6 +175,7 @@ public class Main2Teste {
 					Property p = model.getProperty(nameSpaceMovie+"writer_name");
 					System.out.println("writer:"+stmV.getResource().getProperty(p).getObject().toString());
 					OntologyMethods.addIndividualOnObjProperty(ns, individual, writerT, manager2, ontology2, "writer");
+					OntologyMethods.addDataProperty(ns, "writer_name", stmV.getResource().getProperty(p).getObject().toString(),writerT, manager2, ontology2);
 				
 				}		
 				
@@ -196,6 +197,7 @@ public class Main2Teste {
 					System.out.println("director:"+stmV.getResource().getProperty(p).getObject().toString());
 					
 					OntologyMethods.addIndividualOnObjProperty(ns, individual, directorT, manager2, ontology2, "director");
+					OntologyMethods.addDataProperty(ns, "director_name", stmV.getResource().getProperty(p).getObject().toString(),directorT, manager2, ontology2);
 				
 				}		
 				
@@ -227,8 +229,7 @@ public class Main2Teste {
 
 				OntologyMethods
 						.addIndividualOnObjProperty(namSpaceLinkedMD,
-								individual, r2.getURI(), manager2, ontology2,
-								"#sequel");
+								individual, r2.getURI(), manager2, ontology2,"#sequel");
 			}
 
 		}
@@ -245,6 +246,12 @@ public class Main2Teste {
 		
 		OWLNamedIndividual filmeLab = searchMovieWithLabel("Star Trek III: The Search for Spock",ontology2, manager2, factory2, pm2, reasoner2);
 		OWLNamedIndividual actorLab = searchActorWithLabel("Antonio Banderas",ontology2, manager2, factory2, pm2, reasoner2);
+		OWLNamedIndividual directorLab = searchDirectorWithLabel("Jay Levey",ontology2, manager2, factory2, pm2, reasoner2);
+		OWLNamedIndividual writerLab = searchWriterWithLabel("William Shatner",ontology2, manager2, factory2, pm2, reasoner2);
+		
+		
+		
+		
 
 		if (filmeLab != null) {
 			System.out.println("Voltou");
@@ -261,6 +268,9 @@ public class Main2Teste {
 			
 			OntologyMethods.addIndividualOnObjProperty(ns, personTeste,filmeLab, manager2, ontology2, "#watch");
 			OntologyMethods.addIndividualOnObjProperty(ns, personTeste,actorLab, manager2, ontology2, "#likes");
+			OntologyMethods.addIndividualOnObjProperty(ns, personTeste,directorLab, manager2, ontology2, "#likes");
+			OntologyMethods.addIndividualOnObjProperty(ns, personTeste,writerLab, manager2, ontology2, "#likes");
+			
 
 		}
 		
@@ -275,15 +285,15 @@ public class Main2Teste {
 
 		}
 		
-		filmeLab2 = searchMovieWithLabel("Free Willy 2: The Adventure Home",
-				ontology2, manager2, factory2, pm2, reasoner2);
-		
-		if (filmeLab2 != null) {
-			System.out.println("Voltou3");
-			
-			OntologyMethods.addIndividualOnObjProperty(ns, personTeste2,
-					filmeLab2, manager2, ontology2, "#watch");
-		}
+//		filmeLab2 = searchMovieWithLabel("Free Willy 2: The Adventure Home",
+//				ontology2, manager2, factory2, pm2, reasoner2);
+//		
+//		if (filmeLab2 != null) {
+//			System.out.println("Voltou3");
+//			
+//			OntologyMethods.addIndividualOnObjProperty(ns, personTeste2,
+//					filmeLab2, manager2, ontology2, "#watch");
+//		}
 		
 		reasoner2 = reasonerFactory2.createReasoner(ontology2,
 				new SimpleConfiguration());
@@ -296,8 +306,7 @@ public class Main2Teste {
 
 		String strNs = "<" + ns;
 
-		OWLClass personClass2 = factory2.getOWLClass("<" + ns
-				+ "Film>", pm2);
+		OWLClass personClass2 = factory2.getOWLClass("<" + nameSpaceFao	+ "#Person>", pm2);
 
 		// OWLDataProperty dataPrp =
 		// reasoner2.getInstances(factory2.getOWLDataProperty(strNs+"#label",
@@ -360,7 +369,6 @@ public class Main2Teste {
 			OWLDataProperty dataP = factory.getOWLDataProperty("<" + ns	+ "#label>", pm2);
 
 			for (OWLLiteral ind : reasoner2.getDataPropertyValues(person, dataP)) {
-				// System.out.println("Teste lang: " + renderer.render(ind));
 				if (label.equals(renderer.render(ind))) {
 					System.out.println(person);
 					return person;
@@ -393,4 +401,41 @@ public class Main2Teste {
 		return null;
 	}
 	
+	public static OWLNamedIndividual searchDirectorWithLabel(String label,
+			OWLOntology onto, OWLOntologyManager manager,
+			OWLDataFactory factory, PrefixOWLOntologyFormat pm2,
+			OWLReasoner reasoner2) {
+		OWLClass actorClass = factory.getOWLClass("<" + nameSpaceFao + "#Director>", pm2);
+		
+		for (OWLNamedIndividual person : reasoner2.getInstances(actorClass,	false).getFlattened()) {
+			OWLDataProperty dataP = factory.getOWLDataProperty("<"+ ns +"#director_name>", pm2);
+
+			for (OWLLiteral ind : reasoner2.getDataPropertyValues(person, dataP)) {
+				if (label.equals(renderer.render(ind))) {
+					System.out.println("achei diretor:"+person);
+					return person;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public static OWLNamedIndividual searchWriterWithLabel(String label,
+			OWLOntology onto, OWLOntologyManager manager,
+			OWLDataFactory factory, PrefixOWLOntologyFormat pm2,
+			OWLReasoner reasoner2) {
+		OWLClass actorClass = factory.getOWLClass("<" + nameSpaceFao + "#Writer>", pm2);
+		
+		for (OWLNamedIndividual person : reasoner2.getInstances(actorClass,	false).getFlattened()) {
+			OWLDataProperty dataP = factory.getOWLDataProperty("<"+ ns +"#writer_name>", pm2);
+
+			for (OWLLiteral ind : reasoner2.getDataPropertyValues(person, dataP)) {
+				if (label.equals(renderer.render(ind))) {
+					System.out.println("achei escritor:"+person);
+					return person;
+				}
+			}
+		}
+		return null;
+	}
 }
