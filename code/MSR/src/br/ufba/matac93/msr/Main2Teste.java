@@ -182,8 +182,7 @@ public class Main2Teste {
 
 			// pegando os diretores
 
-			r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie
-					+ "director"));
+			r2 = r.getPropertyResourceValue(model.getProperty(nameSpaceMovie+ "director"));
 			
 			its = r.listProperties(model.getProperty(nameSpaceMovie + "director"));
 			
@@ -244,8 +243,8 @@ public class Main2Teste {
 
 		pm2.setDefaultPrefix(ns + "#");
 		
-		OWLNamedIndividual filmeLab = searchMovieWithLabel("Star Trek III: The Search for Spock",
-				ontology2, manager2, factory2, pm2, reasoner2);
+		OWLNamedIndividual filmeLab = searchMovieWithLabel("Star Trek III: The Search for Spock",ontology2, manager2, factory2, pm2, reasoner2);
+		OWLNamedIndividual actorLab = searchActorWithLabel("Antonio Banderas",ontology2, manager2, factory2, pm2, reasoner2);
 
 		if (filmeLab != null) {
 			System.out.println("Voltou");
@@ -316,8 +315,7 @@ public class Main2Teste {
 			// //
 			// //
 			// //
-			OWLObjectProperty propConhece = factory2.getOWLObjectProperty("<" + ns
-					+ "genre>", pm2);
+			OWLObjectProperty propConhece = factory2.getOWLObjectProperty("<" + ns + "genre>", pm2);
 			
 			//System.out.println(renderer.render(person));
 			
@@ -355,14 +353,11 @@ public class Main2Teste {
 			OWLReasoner reasoner2) {
 		OWLClass movieClass = factory.getOWLClass("<" + ns + "Film>", pm2);
 
-		for (OWLNamedIndividual person : reasoner2.getInstances(movieClass,
-				false).getFlattened()) {
+		for (OWLNamedIndividual person : reasoner2.getInstances(movieClass,false).getFlattened()) {
 
-			OWLDataProperty dataP = factory.getOWLDataProperty("<" + ns
-					+ "#label>", pm2);
+			OWLDataProperty dataP = factory.getOWLDataProperty("<" + ns	+ "#label>", pm2);
 
-			for (OWLLiteral ind : reasoner2
-					.getDataPropertyValues(person, dataP)) {
+			for (OWLLiteral ind : reasoner2.getDataPropertyValues(person, dataP)) {
 				// System.out.println("Teste lang: " + renderer.render(ind));
 				if (label.equals(renderer.render(ind))) {
 					System.out.println(person);
@@ -376,5 +371,27 @@ public class Main2Teste {
 		return null;
 
 	}
+	
+	public static OWLNamedIndividual searchActorWithLabel(String label,
+			OWLOntology onto, OWLOntologyManager manager,
+			OWLDataFactory factory, PrefixOWLOntologyFormat pm2,
+			OWLReasoner reasoner2) {
+		OWLClass actorClass = factory.getOWLClass("<" + nameSpaceFao + "#Actor>", pm2);
+		for (OWLNamedIndividual person : reasoner2.getInstances(actorClass,	false).getFlattened()) {
+			OWLDataProperty dataP = factory.getOWLDataProperty("<"+ ns +"actor_name>", pm2);
 
+			for (OWLLiteral ind : reasoner2.getDataPropertyValues(person, dataP)) {
+				if (label.equals(renderer.render(ind))) {
+					System.out.println("achei ator:"+person);
+					return person;
+				}
+
+			}
+
+		}
+
+		return null;
+
+	}
+	
 }
